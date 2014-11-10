@@ -1,0 +1,36 @@
+# Build the Bindj for OS X.
+# Expects CLASSPATH to be set appropriately for running, and JAVA_HOME
+# to be passed in so we can find the tools.
+
+OBJDIR = target/obj
+SODIR = src/main/resources/dylib
+SRCDIR = src/main/cpp
+SYSROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk/
+RAKNETINC = /Users/bcarson/Development/RakNet/Source
+RAKNETLIB = src/main/resources/lib/raknetx86_64.a
+
+JAVA_HOME = /System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/
+
+INCLUDE = -I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/darwin \
+	-I$(JAVA_HOME)/../include -I$(JAVA_HOME)/../include/darwin \
+	-I$(RAKNETINC)
+
+C_OBJ = $(OBJDIR)/*.o
+C_SRC = $(SRCDIR)/*.cpp
+C_SO = $(SODIR)/libRakNetNatives.dylib
+
+.PHONY: all
+all: $(C_SO)
+
+$(C_SO): $(C_OBJ) $(SODIR)
+	gcc -g -fPIC --sysroot=$(SYSROOT) -shared -o $@ *.o $(RAKNETLIB) /usr/lib/libc++.dylib /usr/lib/libc.dylib
+$(C_OBJ): $(C_SRC) $(HEADERS) $(OBJDIR)
+	gcc -g -fPIC -c -O $(INCLUDE) $(C_SRC)
+
+$(OBJDIR):
+	mkdir $(OBJDIR)
+$(SODIR):
+	mkdir $(SODIR)
+
+clean:
+	rm -rf $(C_OBJ) $(C_SO)
