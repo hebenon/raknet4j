@@ -11,6 +11,8 @@ extern "C" {
 
 jobject convertStartupResult(JNIEnv *env, RakNet::StartupResult result);
 
+jobject convertConnectionAttemptResult(JNIEnv *env, RakNet::ConnectionAttemptResult result);
+
 PacketPriority convertPacketPriority(JNIEnv *env, jobject packetPriorityEnum);
 
 #ifdef __cplusplus

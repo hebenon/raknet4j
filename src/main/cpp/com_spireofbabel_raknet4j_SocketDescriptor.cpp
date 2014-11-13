@@ -35,12 +35,12 @@ JNIEXPORT void JNICALL Java_com_spireofbabel_raknet4j_SocketDescriptor_nativeDes
  * Method:    getPort
  * Signature: ()S
  */
-JNIEXPORT jchar JNICALL Java_com_spireofbabel_raknet4j_SocketDescriptor_getPort
+JNIEXPORT jint JNICALL Java_com_spireofbabel_raknet4j_SocketDescriptor_getPort
   (JNIEnv *env, jobject object)
   {
     SocketDescriptor *instance = getHandle<SocketDescriptor>(env,object);
 
-    return reinterpret_cast<jchar>(instance->port);
+    return reinterpret_cast<jint>((int)instance->port);
   }
 
 /*
@@ -49,11 +49,11 @@ JNIEXPORT jchar JNICALL Java_com_spireofbabel_raknet4j_SocketDescriptor_getPort
  * Signature: (S)V
  */
 JNIEXPORT void JNICALL Java_com_spireofbabel_raknet4j_SocketDescriptor_setPort
-  (JNIEnv *env, jobject object, jchar port)
+  (JNIEnv *env, jobject object, jint port)
   {
     SocketDescriptor *instance = getHandle<SocketDescriptor>(env,object);
 
-    instance->port = reinterpret_cast<unsigned short>(port);
+    instance->port = (unsigned short)reinterpret_cast<int>(port);
   }
 
 /*

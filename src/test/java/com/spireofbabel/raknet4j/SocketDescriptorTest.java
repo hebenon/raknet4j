@@ -22,9 +22,9 @@ public class SocketDescriptorTest {
     public void TestPortProperty() {
         SocketDescriptor instance = new SocketDescriptor();
 
-        instance.setPort((char)3267);
+        instance.setPort(3267);
 
-        assertThat(instance.getPort(), is(equalTo((char) 3267)));
+        assertThat(instance.getPort(), is(equalTo(3267)));
     }
 
     @Test

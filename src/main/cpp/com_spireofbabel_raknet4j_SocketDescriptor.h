@@ -28,16 +28,16 @@ JNIEXPORT void JNICALL Java_com_spireofbabel_raknet4j_SocketDescriptor_nativeDes
  * Method:    getPort
  * Signature: ()C
  */
-JNIEXPORT jchar JNICALL Java_com_spireofbabel_raknet4j_SocketDescriptor_getPort
+JNIEXPORT jint JNICALL Java_com_spireofbabel_raknet4j_SocketDescriptor_getPort
   (JNIEnv *, jobject);
 
 /*
  * Class:     com_spireofbabel_raknet4j_SocketDescriptor
  * Method:    setPort
- * Signature: (C)V
+ * Signature: (I)V
  */
 JNIEXPORT void JNICALL Java_com_spireofbabel_raknet4j_SocketDescriptor_setPort
-  (JNIEnv *, jobject, jchar);
+  (JNIEnv *, jobject, jint);
 
 /*
  * Class:     com_spireofbabel_raknet4j_SocketDescriptor

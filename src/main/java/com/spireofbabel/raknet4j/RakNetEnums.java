@@ -20,6 +20,16 @@ public class RakNetEnums {
     	STARTUP_OTHER_FAILURE
     }
 
+	enum ConnectionAttemptResult
+	{
+		CONNECTION_ATTEMPT_STARTED,
+		INVALID_PARAMETER,
+		CANNOT_RESOLVE_DOMAIN_NAME,
+		ALREADY_CONNECTED_TO_ENDPOINT,
+		CONNECTION_ATTEMPT_ALREADY_IN_PROGRESS,
+		SECURITY_INITIALIZATION_FAILED
+	}
+
 	/// These enumerations are used to describe when packets are delivered.
 	enum PacketPriority
 	{

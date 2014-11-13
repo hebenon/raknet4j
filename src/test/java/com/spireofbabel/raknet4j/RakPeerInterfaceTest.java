@@ -19,20 +19,7 @@ public class RakPeerInterfaceTest {
     }
 
     @Test
-    public void TestStartup() {
-        RakPeerInterface instance = RakPeerInterface.GetInstance();
-
-        SocketDescriptor [] descriptors = new SocketDescriptor[1];
-        descriptors[0] = new SocketDescriptor((short)8196, "");
-
-        assertThat(instance.Startup(1, descriptors, -99999), is(RakNetEnums.StartupResult.RAKNET_STARTED));
-
-        instance.Shutdown(0, 0, RakNetEnums.PacketPriority.LOW_PRIORITY);
-        RakPeerInterface.DestroyInstance(instance);
-    }
-
-    @Test
-    public void TestShutdown() {
+    public void TestStartupAndShutdown() {
         RakPeerInterface instance = RakPeerInterface.GetInstance();
 
         SocketDescriptor [] descriptors = new SocketDescriptor[1];
@@ -47,5 +34,41 @@ public class RakPeerInterfaceTest {
         assertThat(instance.IsActive(), is(equalTo(false)));
 
         RakPeerInterface.DestroyInstance(instance);
+    }
+
+    @Test
+    public void TestGetSetMaximumConnections() {
+        RakPeerInterface instance = RakPeerInterface.GetInstance();
+
+        SocketDescriptor [] descriptors = new SocketDescriptor[1];
+        descriptors[0] = new SocketDescriptor((short)8196, "");
+
+        assertThat(instance.Startup(1, descriptors, -99999), is(RakNetEnums.StartupResult.RAKNET_STARTED));
+
+        instance.SetMaximumIncomingConnections(5);
+
+        assertThat(instance.GetMaximumIncomingConnections(), is(equalTo(5)));
+
+        RakPeerInterface.DestroyInstance(instance);
+    }
+
+    @Test
+    public void TestConnect() {
+        RakPeerInterface serverPeer = RakPeerInterface.GetInstance();
+        RakPeerInterface clientPeer = RakPeerInterface.GetInstance();
+
+        SocketDescriptor [] descriptors = new SocketDescriptor[1];
+        descriptors[0] = new SocketDescriptor((short)8196, "");
+
+        assertThat(serverPeer.Startup(1, descriptors, -99999), is(RakNetEnums.StartupResult.RAKNET_STARTED));
+
+        SocketDescriptor [] clientDescriptors = new SocketDescriptor[1];
+        clientDescriptors[0] = new SocketDescriptor(0, "");
+
+        assertThat(clientPeer.Startup(1, clientDescriptors, -99999), is(RakNetEnums.StartupResult.RAKNET_STARTED));
+        assertThat(clientPeer.Connect("127.0.0.1", 8196, new byte[0], null, 0, 1, 500, 500), is(RakNetEnums.ConnectionAttemptResult.CONNECTION_ATTEMPT_STARTED));
+
+        RakPeerInterface.DestroyInstance(serverPeer);
+        RakPeerInterface.DestroyInstance(clientPeer);
     }
 }

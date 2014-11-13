@@ -44,17 +44,22 @@ struct RAK_DLL_EXPORT SocketDescriptor
 };
 */
 public class SocketDescriptor {
+    static {
+        String libPath = RakPeerInterface.class.getClassLoader().getResource("dylib/libRakNetNatives.dylib").getPath();
+        System.load(libPath);
+    }
+
     private long nativeHandle;
 
     public SocketDescriptor() {
         nativeHandle = nativeGetInstance();
     }
 
-    public SocketDescriptor(short _port, String _hostAddress) {
+    public SocketDescriptor(int _port, String _hostAddress) {
         nativeHandle = nativeGetInstance();
 
         setHostAddress(_hostAddress);
-        setPort((char)_port);
+        setPort(_port);
     }
 
     public enum SocketFamily {
@@ -67,8 +72,8 @@ public class SocketDescriptor {
     private static native long nativeGetInstance();
     private static native void nativeDestroyInstance(long i);
 
-    native char getPort();
-    native void setPort(char port);
+    native int getPort();
+    native void setPort(int port);
 
     native String getHostAddress();
     native void setHostAddress(String hostAddress);

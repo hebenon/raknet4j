@@ -71,6 +71,43 @@ jobject convertStartupResult(JNIEnv *env, StartupResult result)
     return 0;
 }
 
+jobject convertConnectionAttemptResult(JNIEnv *env, ConnectionAttemptResult result)
+{
+    jclass enumClass = env->FindClass("com/spireofbabel/raknet4j/RakNetEnums$ConnectionAttemptResult");
+    switch(result) {
+        case CONNECTION_ATTEMPT_STARTED:
+        {
+            jfieldID enumField = env->GetStaticFieldID(enumClass, "CONNECTION_ATTEMPT_STARTED", "Lcom/spireofbabel/raknet4j/RakNetEnums$ConnectionAttemptResult;");
+            return env->GetStaticObjectField(enumClass, enumField);
+        }
+        case INVALID_PARAMETER:
+        {
+            jfieldID enumField = env->GetStaticFieldID(enumClass, "INVALID_PARAMETER", "Lcom/spireofbabel/raknet4j/RakNetEnums$ConnectionAttemptResult;");
+            return env->GetStaticObjectField(enumClass, enumField);
+        }
+        case CANNOT_RESOLVE_DOMAIN_NAME:
+        {
+            jfieldID enumField = env->GetStaticFieldID(enumClass, "CANNOT_RESOLVE_DOMAIN_NAME", "Lcom/spireofbabel/raknet4j/RakNetEnums$ConnectionAttemptResult;");
+            return env->GetStaticObjectField(enumClass, enumField);
+        }
+        case ALREADY_CONNECTED_TO_ENDPOINT:
+        {
+            jfieldID enumField = env->GetStaticFieldID(enumClass, "ALREADY_CONNECTED_TO_ENDPOINT", "Lcom/spireofbabel/raknet4j/RakNetEnums$ConnectionAttemptResult;");
+            return env->GetStaticObjectField(enumClass, enumField);
+        }
+        case CONNECTION_ATTEMPT_ALREADY_IN_PROGRESS:
+        {
+            jfieldID enumField = env->GetStaticFieldID(enumClass, "CONNECTION_ATTEMPT_ALREADY_IN_PROGRESS", "Lcom/spireofbabel/raknet4j/RakNetEnums$ConnectionAttemptResult;");
+            return env->GetStaticObjectField(enumClass, enumField);
+        }
+        case SECURITY_INITIALIZATION_FAILED:
+        {
+            jfieldID enumField = env->GetStaticFieldID(enumClass, "SECURITY_INITIALIZATION_FAILED", "Lcom/spireofbabel/raknet4j/RakNetEnums$ConnectionAttemptResult;");
+            return env->GetStaticObjectField(enumClass, enumField);
+        }
+    }
+}
+
 PacketPriority convertPacketPriority(JNIEnv *env, jobject enumObj)
 {
     jclass enumClass = env->FindClass("com/spireofbabel/raknet4j/RakNetEnums$PacketPriority");

@@ -33,6 +33,102 @@ JNIEXPORT jobject JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_Startu
 
 /*
  * Class:     com_spireofbabel_raknet4j_RakPeerInterface
+ * Method:    InitializeSecurity
+ * Signature: ([B[BZ)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_InitializeSecurity
+  (JNIEnv *, jobject, jbyteArray, jbyteArray, jboolean);
+
+/*
+ * Class:     com_spireofbabel_raknet4j_RakPeerInterface
+ * Method:    DisableSecurity
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_DisableSecurity
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_spireofbabel_raknet4j_RakPeerInterface
+ * Method:    AddToSecurityExceptionList
+ * Signature: (Ljava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_AddToSecurityExceptionList
+  (JNIEnv *, jobject, jstring);
+
+/*
+ * Class:     com_spireofbabel_raknet4j_RakPeerInterface
+ * Method:    RemoveFromSecurityExceptionList
+ * Signature: (Ljava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_RemoveFromSecurityExceptionList
+  (JNIEnv *, jobject, jstring);
+
+/*
+ * Class:     com_spireofbabel_raknet4j_RakPeerInterface
+ * Method:    IsInSecurityExceptionList
+ * Signature: (Ljava/lang/String;)Z
+ */
+JNIEXPORT jboolean JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_IsInSecurityExceptionList
+  (JNIEnv *, jobject, jstring);
+
+/*
+ * Class:     com_spireofbabel_raknet4j_RakPeerInterface
+ * Method:    SetMaximumIncomingConnections
+ * Signature: (I)V
+ */
+JNIEXPORT void JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_SetMaximumIncomingConnections
+  (JNIEnv *, jobject, jint);
+
+/*
+ * Class:     com_spireofbabel_raknet4j_RakPeerInterface
+ * Method:    GetMaximumIncomingConnections
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_GetMaximumIncomingConnections
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_spireofbabel_raknet4j_RakPeerInterface
+ * Method:    NumberOfConnections
+ * Signature: ()I
+ */
+JNIEXPORT jint JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_NumberOfConnections
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_spireofbabel_raknet4j_RakPeerInterface
+ * Method:    SetIncomingPassword
+ * Signature: ([B)V
+ */
+JNIEXPORT void JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_SetIncomingPassword
+  (JNIEnv *, jobject, jbyteArray);
+
+/*
+ * Class:     com_spireofbabel_raknet4j_RakPeerInterface
+ * Method:    GetIncomingPassword
+ * Signature: ([B)V
+ */
+JNIEXPORT void JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_GetIncomingPassword
+  (JNIEnv *, jobject, jbyteArray);
+
+/*
+ * Class:     com_spireofbabel_raknet4j_RakPeerInterface
+ * Method:    Connect
+ * Signature: (Ljava/lang/String;I[BLcom/spireofbabel/raknet4j/PublicKey;IIII)Lcom/spireofbabel/raknet4j/RakNetEnums/ConnectionAttemptResult;
+ */
+JNIEXPORT jobject JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_Connect
+  (JNIEnv *, jobject, jstring, jint, jbyteArray, jobject, jint, jint, jint, jint);
+
+/*
+ * Class:     com_spireofbabel_raknet4j_RakPeerInterface
+ * Method:    ConnectWithSocket
+ * Signature: (Ljava/lang/String;I[BLcom/spireofbabel/raknet4j/RakNetSocket2/RakNetSocket2;Lcom/spireofbabel/raknet4j/PublicKey;III)Lcom/spireofbabel/raknet4j/RakNetEnums/ConnectionAttemptResult;
+ */
+JNIEXPORT jobject JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_ConnectWithSocket
+  (JNIEnv *, jobject, jstring, jint, jbyteArray, jobject, jobject, jint, jint, jint);
+
+/*
+ * Class:     com_spireofbabel_raknet4j_RakPeerInterface
  * Method:    Shutdown
  * Signature: (IILcom/spireofbabel/raknet4j/RakNetEnums/PacketPriority;)V
  */
