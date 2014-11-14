@@ -2,11 +2,24 @@ package com.spireofbabel.raknet4j.ReplicaManager3;
 
 import com.spireofbabel.raknet4j.BitStream;
 import com.spireofbabel.raknet4j.RakNetGUID;
+import com.spireofbabel.raknet4j.RakPeerInterface;
 
 /**
  * Created by bcarson on 11/11/14.
  */
 abstract class Replica3 {
+	static {
+		 String libPath = Replica3.class.getClassLoader().getResource("dylib/libRakNetNatives.dylib").getPath();
+		 System.load(libPath);
+	}
+
+	long nativeHandle;
+
+	public Replica3() {
+		nativeHandle = nativeReplica3();
+	}
+	private native long nativeReplica3();
+
 	/// \brief Return codes for Connection_RM3::GetConstructionState() and Replica3::QueryConstruction()
 	/// \details Indicates what state the object should be in for the remote system
 	/// \ingroup REPLICA_MANAGER_GROUP3

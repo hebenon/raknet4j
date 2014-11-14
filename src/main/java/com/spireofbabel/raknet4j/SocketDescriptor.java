@@ -45,7 +45,7 @@ struct RAK_DLL_EXPORT SocketDescriptor
 */
 public class SocketDescriptor {
     static {
-        String libPath = RakPeerInterface.class.getClassLoader().getResource("dylib/libRakNetNatives.dylib").getPath();
+        String libPath = SocketDescriptor.class.getClassLoader().getResource("dylib/libRakNetNatives.dylib").getPath();
         System.load(libPath);
     }
 

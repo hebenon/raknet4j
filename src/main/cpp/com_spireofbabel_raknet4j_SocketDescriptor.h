@@ -26,7 +26,7 @@ JNIEXPORT void JNICALL Java_com_spireofbabel_raknet4j_SocketDescriptor_nativeDes
 /*
  * Class:     com_spireofbabel_raknet4j_SocketDescriptor
  * Method:    getPort
- * Signature: ()C
+ * Signature: ()I
  */
 JNIEXPORT jint JNICALL Java_com_spireofbabel_raknet4j_SocketDescriptor_getPort
   (JNIEnv *, jobject);

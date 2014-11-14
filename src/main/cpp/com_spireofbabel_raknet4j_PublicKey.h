@@ -9,6 +9,14 @@ extern "C" {
 #endif
 /*
  * Class:     com_spireofbabel_raknet4j_PublicKey
+ * Method:    nativePublicKey
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_spireofbabel_raknet4j_PublicKey_nativePublicKey
+  (JNIEnv *, jobject);
+
+/*
+ * Class:     com_spireofbabel_raknet4j_PublicKey
  * Method:    getPublicKeyMode
  * Signature: ()Lcom/spireofbabel/raknet4j/PublicKey/PublicKeyMode;
  */

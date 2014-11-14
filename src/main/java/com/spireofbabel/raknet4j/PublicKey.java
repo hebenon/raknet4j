@@ -6,9 +6,15 @@ package com.spireofbabel.raknet4j;
 
 public class PublicKey {
     static {
-        String libPath = RakPeerInterface.class.getClassLoader().getResource("dylib/libRakNetNatives.dylib").getPath();
+        String libPath = PublicKey.class.getClassLoader().getResource("dylib/libRakNetNatives.dylib").getPath();
         System.load(libPath);
     }
+
+    private long nativeHandle;
+    public PublicKey() {
+        nativeHandle = nativePublicKey();
+    }
+    private native long nativePublicKey();
 
     /// Used with the PublicKey structure
     enum PublicKeyMode

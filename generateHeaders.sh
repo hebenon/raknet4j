@@ -1,0 +1,1 @@
+/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/bin/javah -d ./src/main/cpp -classpath ./target/scala-2.10/classes com.spireofbabel.raknet4j.RakPeerInterface com.spireofbabel.raknet4j.PublicKey com.spireofbabel.raknet4j.RakNetEnums com.spireofbabel.raknet4j.SocketDescriptor
