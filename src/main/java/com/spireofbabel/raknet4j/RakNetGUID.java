@@ -9,15 +9,20 @@ public class RakNetGUID {
         System.load(libPath);
     }
 
-    private long nativeHandle;
+    private NativeHandle nativeHandle;
 
     public RakNetGUID() {
         nativeHandle = nativeRakNetGUID();
     }
+
+    private RakNetGUID(NativeHandle _handle) {
+        nativeHandle = _handle;
+    }
+
     public RakNetGUID(long _g) {
         nativeHandle = nativeRakNetGUID(_g);
     }
 
-    private native long nativeRakNetGUID();
-    private native long nativeRakNetGUID(long _g);
+    private native NativeHandle nativeRakNetGUID();
+    private native NativeHandle nativeRakNetGUID(long _g);
 }

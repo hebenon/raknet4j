@@ -9,19 +9,19 @@ extern "C" {
 #endif
 /*
  * Class:     com_spireofbabel_raknet4j_SocketDescriptor
- * Method:    nativeGetInstance
- * Signature: ()J
+ * Method:    nativeSocketDescriptor
+ * Signature: ()Lcom/spireofbabel/raknet4j/NativeHandle;
  */
-JNIEXPORT jlong JNICALL Java_com_spireofbabel_raknet4j_SocketDescriptor_nativeGetInstance
+JNIEXPORT jobject JNICALL Java_com_spireofbabel_raknet4j_SocketDescriptor_nativeSocketDescriptor
   (JNIEnv *, jclass);
 
 /*
  * Class:     com_spireofbabel_raknet4j_SocketDescriptor
  * Method:    nativeDestroyInstance
- * Signature: (J)V
+ * Signature: (Lcom/spireofbabel/raknet4j/NativeHandle;)V
  */
 JNIEXPORT void JNICALL Java_com_spireofbabel_raknet4j_SocketDescriptor_nativeDestroyInstance
-  (JNIEnv *, jclass, jlong);
+  (JNIEnv *, jclass, jobject);
 
 /*
  * Class:     com_spireofbabel_raknet4j_SocketDescriptor

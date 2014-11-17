@@ -10,12 +10,12 @@ using namespace RakNet;
  * Method:    nativeGetInstance
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_com_spireofbabel_raknet4j_SocketDescriptor_nativeGetInstance
-  (JNIEnv *, jclass)
+JNIEXPORT jobject JNICALL Java_com_spireofbabel_raknet4j_SocketDescriptor_nativeSocketDescriptor
+  (JNIEnv *env, jclass clazz)
   {
     SocketDescriptor *instance = new SocketDescriptor();
 
-    return reinterpret_cast<jlong>(instance);
+    return createHandleObject(env,instance);
   }
 
 /*
@@ -24,11 +24,11 @@ JNIEXPORT jlong JNICALL Java_com_spireofbabel_raknet4j_SocketDescriptor_nativeGe
  * Signature: (J)V
  */
 JNIEXPORT void JNICALL Java_com_spireofbabel_raknet4j_SocketDescriptor_nativeDestroyInstance
-  (JNIEnv *, jclass, jlong handle)
-  {
-    SocketDescriptor *instance = reinterpret_cast<SocketDescriptor *>(handle);
-    delete instance;
-  }
+  (JNIEnv *env, jclass clazz, jobject handle)
+{
+  SocketDescriptor *instance = dereferenceHandle<SocketDescriptor>(env, handle);
+  delete instance;
+}
 
 /*
  * Class:     com_spireofbabel_raknet4j_SocketDescriptor
@@ -40,7 +40,7 @@ JNIEXPORT jint JNICALL Java_com_spireofbabel_raknet4j_SocketDescriptor_getPort
   {
     SocketDescriptor *instance = getHandle<SocketDescriptor>(env,object);
 
-    return reinterpret_cast<jint>((int)instance->port);
+    return (jint)instance->port;
   }
 
 /*
@@ -53,7 +53,7 @@ JNIEXPORT void JNICALL Java_com_spireofbabel_raknet4j_SocketDescriptor_setPort
   {
     SocketDescriptor *instance = getHandle<SocketDescriptor>(env,object);
 
-    instance->port = (unsigned short)reinterpret_cast<int>(port);
+    instance->port = (unsigned short)port;
   }
 
 /*

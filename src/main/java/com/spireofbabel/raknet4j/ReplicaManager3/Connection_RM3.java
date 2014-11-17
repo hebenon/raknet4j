@@ -1,6 +1,7 @@
 package com.spireofbabel.raknet4j.ReplicaManager3;
 
 import com.spireofbabel.raknet4j.BitStream;
+import com.spireofbabel.raknet4j.NativeHandle;
 import com.spireofbabel.raknet4j.RakNetGUID;
 import com.spireofbabel.raknet4j.RakNetSocket2.SystemAddress;
 
@@ -10,12 +11,17 @@ import java.util.List;
  * Created by bcarson on 13/11/14.
  */
 abstract public class Connection_RM3 {
-    private long nativeHandle;
+    private NativeHandle nativeHandle;
+
+    public Connection_RM3() { nativeHandle = nativeConnection_RM3(); }
 
     public Connection_RM3(SystemAddress _systemAddress, RakNetGUID _guid) {
         nativeHandle = nativeConnection_RM3(_systemAddress, _guid);
     }
-    private native long nativeConnection_RM3(SystemAddress _systemAddress, RakNetGUID _guid);
+
+    private native NativeHandle nativeConnection_RM3();
+    private native NativeHandle nativeConnection_RM3(SystemAddress _systemAddress, RakNetGUID _guid);
+    public native static void nativeDestroyInstance(NativeHandle handle);
 
     /// \brief Class factory to create a Replica3 instance, given a user-defined identifier
     /// \details Identifier is returned by Replica3::WriteAllocationID() for what type of class to create.<BR>

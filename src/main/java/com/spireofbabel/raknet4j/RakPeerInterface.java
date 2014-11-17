@@ -15,15 +15,14 @@ public class RakPeerInterface {
         System.load(libPath);
     }
 
-    private long nativeHandle;
+    private NativeHandle nativeHandle;
 
-    public RakPeerInterface(long handle) {
+    private RakPeerInterface(NativeHandle handle) {
         nativeHandle = handle;
     }
 
     public static RakPeerInterface GetInstance() {
-        long handle = nativeGetInstance();
-        return new RakPeerInterface(handle);
+        return new RakPeerInterface(nativeGetInstance());
     }
 
     public static void DestroyInstance(RakPeerInterface i) {
@@ -31,8 +30,8 @@ public class RakPeerInterface {
     }
 
     // Native functions
-    private static native long nativeGetInstance();
-    private static native void nativeDestroyInstance(long i);
+    private static native NativeHandle nativeGetInstance();
+    private static native void nativeDestroyInstance(NativeHandle i);
 
 	// --------------------------------------------------------------------------------------------Major Low Level Functions - Functions needed by most users--------------------------------------------------------------------------------------------
 	/// \brief Starts the network threads and opens the listen port.
@@ -154,4 +153,16 @@ public class RakPeerInterface {
 	/// Returns if the network thread is running
 	/// \return true if the network thread is running, false otherwise
 	public native boolean IsActive();
+
+	// -------------------------------------------------------------------------------------------- Plugin Functions--------------------------------------------------------------------------------------------
+	/// \brief Attaches a Plugin interface to an instance of the base class (RakPeer or PacketizedTCP) to run code automatically on message receipt in the Receive call.
+	/// If the plugin returns false from PluginInterface::UsesReliabilityLayer(), which is the case for all plugins except PacketLogger, you can call AttachPlugin() and DetachPlugin() for this plugin while RakPeer is active.
+	/// \param[in] messageHandler Pointer to the plugin to attach.
+	public native void AttachPlugin( PluginInterface2 plugin );
+
+	/// \brief Detaches a Plugin interface from the instance of the base class (RakPeer or PacketizedTCP) it is attached to.
+	///	\details This method disables the plugin code from running automatically on base class's updates or message receipt.
+	/// If the plugin returns false from PluginInterface::UsesReliabilityLayer(), which is the case for all plugins except PacketLogger, you can call AttachPlugin() and DetachPlugin() for this plugin while RakPeer is active.
+	/// \param[in] messageHandler Pointer to a plugin to detach.
+	public native void DetachPlugin( PluginInterface2 messageHandler );
 }

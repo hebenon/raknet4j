@@ -10,11 +10,17 @@ public class PublicKey {
         System.load(libPath);
     }
 
-    private long nativeHandle;
+    private NativeHandle nativeHandle;
+
     public PublicKey() {
         nativeHandle = nativePublicKey();
     }
-    private native long nativePublicKey();
+
+    public PublicKey(NativeHandle _nativeHandle) {
+        nativeHandle = _nativeHandle;
+    }
+
+    private native NativeHandle nativePublicKey();
 
     /// Used with the PublicKey structure
     enum PublicKeyMode

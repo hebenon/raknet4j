@@ -114,5 +114,5 @@ PacketPriority convertPacketPriority(JNIEnv *env, jobject enumObj)
     jmethodID getOrdinalMethod = env->GetMethodID(enumClass, "ordinal", "()I");
     jint value = env->CallIntMethod(enumObj, getOrdinalMethod);
 
-    return (PacketPriority)reinterpret_cast<int>(value);
+    return (PacketPriority)value;
 }

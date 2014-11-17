@@ -10,9 +10,9 @@ public class ConsoleServer  {
         System.load(libPath);
     }
 
-    private long nativeHandle;
+    private NativeHandle nativeHandle;
 
-    public ConsoleServer(long handle) {
+    public ConsoleServer(NativeHandle handle) {
         nativeHandle = handle;
     }
 
@@ -25,6 +25,6 @@ public class ConsoleServer  {
     }
 
     // Native functions
-    private static native long nativeGetInstance();
-    private static native void nativeDestroyInstance(long i);
+    private static native NativeHandle nativeGetInstance();
+    private static native void nativeDestroyInstance(NativeHandle i);
 }

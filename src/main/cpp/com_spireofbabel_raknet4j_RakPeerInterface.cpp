@@ -9,18 +9,18 @@
 
 using namespace RakNet;
 
-JNIEXPORT jlong JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_nativeGetInstance
-  (JNIEnv *, jclass)
+JNIEXPORT jobject JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_nativeGetInstance
+  (JNIEnv *env, jclass clazz)
 {
     RakPeerInterface *instance = RakPeerInterface :: GetInstance();
 
-    return reinterpret_cast<jlong>(instance);
+    return createHandleObject(env, instance);
 }
 
 JNIEXPORT void JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_nativeDestroyInstance
-  (JNIEnv *, jclass, jlong handle)
+  (JNIEnv *env, jclass clazz, jobject handle)
 {
-    RakPeerInterface *instance = reinterpret_cast<RakPeerInterface *>(handle);
+    RakPeerInterface *instance = dereferenceHandle<RakPeerInterface>(env, handle);
 
     RakPeerInterface :: DestroyInstance(instance);
 }
@@ -48,7 +48,7 @@ JNIEXPORT jobject JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_Startu
         env->DeleteLocalRef(element);
     }
 
-    StartupResult result = instance->Startup(reinterpret_cast<int>(maxConnections), descriptors, reinterpret_cast<int>(descriptorCount), reinterpret_cast<int>(maxThreadPriority));
+    StartupResult result = instance->Startup((int)maxConnections, descriptors, (int)descriptorCount, (int)maxThreadPriority);
 
     delete [] descriptors;
 
@@ -65,7 +65,7 @@ JNIEXPORT void JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_SetMaximu
 {
     RakPeerInterface *instance = getHandle<RakPeerInterface>(env, object);
 
-    instance->SetMaximumIncomingConnections(reinterpret_cast<int>(maximumConnections));
+    instance->SetMaximumIncomingConnections((int)maximumConnections);
 }
 
 /*
@@ -79,7 +79,7 @@ JNIEXPORT jint JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_GetMaximu
     RakPeerInterface *instance = getHandle<RakPeerInterface>(env, object);
     
     // There's some confusion in the set method signatures, so I've constrained the result to int.
-    return reinterpret_cast<jint>((int)instance->GetMaximumIncomingConnections());
+    return (jint)instance->GetMaximumIncomingConnections();
 }
 
 /*
@@ -92,7 +92,7 @@ JNIEXPORT jint JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_NumberOfC
 {
     RakPeerInterface *instance = getHandle<RakPeerInterface>(env, object);
 
-    return reinterpret_cast<jint>((int)instance->NumberOfConnections());
+    return (jint)instance->NumberOfConnections();
 }
 
 /*
@@ -107,11 +107,11 @@ JNIEXPORT jobject JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_Connec
 
     // Marshall the arguments.
     const char *nativeHostAddress = env->GetStringUTFChars(hostAddress, 0);
-    unsigned short nativeRemotePort = (unsigned short)reinterpret_cast<int>(remotePort);
+    unsigned short nativeRemotePort = (unsigned short)remotePort;
     unsigned nativeConnectionSocketIndex = (unsigned)connectionSocketIndex;
     unsigned nativeSendConnectionAttemptCount = (unsigned)nativeSendConnectionAttemptCount;
     unsigned nativeTimeBetweenSendConnectionAttemptsMS = (unsigned)timeBetweenSendConnectionAttemptsMS;
-    RakNet::TimeMS nativeTimeoutTime = (RakNet::TimeMS)reinterpret_cast<int>(timeoutTime);
+    RakNet::TimeMS nativeTimeoutTime = (RakNet::TimeMS)timeoutTime;
     
     PublicKey *nativePublicKey = 0;
     if(0 != publicKey)
@@ -154,7 +154,7 @@ JNIEXPORT void JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_Shutdown
 {
     RakPeerInterface *instance = getHandle<RakPeerInterface>(env, object);
 
-    instance->Shutdown(reinterpret_cast<int>(blockDuration), (unsigned char)reinterpret_cast<int>(orderingChannel), convertPacketPriority(env, disconnectionNotificationPriority));
+    instance->Shutdown((int)blockDuration, (unsigned char)orderingChannel, convertPacketPriority(env, disconnectionNotificationPriority));
 }
 
 JNIEXPORT jboolean JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_IsActive
@@ -163,4 +163,19 @@ JNIEXPORT jboolean JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_IsAct
     RakPeerInterface *instance = getHandle<RakPeerInterface>(env, object);
 
     return (jboolean)instance->IsActive();
+}
+
+/*
+ * Class:     com_spireofbabel_raknet4j_RakPeerInterface
+ * Method:    AttachPlugin
+ * Signature: (Lcom/spireofbabel/raknet4j/PluginInterface2;)V
+ */
+JNIEXPORT void JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_AttachPlugin
+(JNIEnv *env, jobject object, jobject pluginObject)
+{
+    RakPeerInterface *instance = getHandle<RakPeerInterface>(env, object);
+    
+    PluginInterface2 *plugin = getHandle<PluginInterface2>(env, pluginObject);
+    
+    instance->AttachPlugin(plugin);
 }

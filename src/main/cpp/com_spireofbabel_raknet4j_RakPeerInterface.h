@@ -10,18 +10,18 @@ extern "C" {
 /*
  * Class:     com_spireofbabel_raknet4j_RakPeerInterface
  * Method:    nativeGetInstance
- * Signature: ()J
+ * Signature: ()Lcom/spireofbabel/raknet4j/NativeHandle;
  */
-JNIEXPORT jlong JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_nativeGetInstance
+JNIEXPORT jobject JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_nativeGetInstance
   (JNIEnv *, jclass);
 
 /*
  * Class:     com_spireofbabel_raknet4j_RakPeerInterface
  * Method:    nativeDestroyInstance
- * Signature: (J)V
+ * Signature: (Lcom/spireofbabel/raknet4j/NativeHandle;)V
  */
 JNIEXPORT void JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_nativeDestroyInstance
-  (JNIEnv *, jclass, jlong);
+  (JNIEnv *, jclass, jobject);
 
 /*
  * Class:     com_spireofbabel_raknet4j_RakPeerInterface
@@ -142,6 +142,22 @@ JNIEXPORT void JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_Shutdown
  */
 JNIEXPORT jboolean JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_IsActive
   (JNIEnv *, jobject);
+
+/*
+ * Class:     com_spireofbabel_raknet4j_RakPeerInterface
+ * Method:    AttachPlugin
+ * Signature: (Lcom/spireofbabel/raknet4j/PluginInterface2;)V
+ */
+JNIEXPORT void JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_AttachPlugin
+  (JNIEnv *, jobject, jobject);
+
+/*
+ * Class:     com_spireofbabel_raknet4j_RakPeerInterface
+ * Method:    DetachPlugin
+ * Signature: (Lcom/spireofbabel/raknet4j/PluginInterface2;)V
+ */
+JNIEXPORT void JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_DetachPlugin
+  (JNIEnv *, jobject, jobject);
 
 #ifdef __cplusplus
 }

@@ -1,6 +1,7 @@
 package com.spireofbabel.raknet4j.ReplicaManager3;
 
 import com.spireofbabel.raknet4j.BitStream;
+import com.spireofbabel.raknet4j.NativeHandle;
 import com.spireofbabel.raknet4j.RakNetGUID;
 import com.spireofbabel.raknet4j.RakPeerInterface;
 
@@ -13,12 +14,15 @@ abstract class Replica3 {
 		 System.load(libPath);
 	}
 
-	long nativeHandle;
+	NativeHandle nativeHandle;
 
 	public Replica3() {
 		nativeHandle = nativeReplica3();
 	}
-	private native long nativeReplica3();
+	public Replica3(NativeHandle _handle) { nativeHandle = _handle; }
+
+	private native NativeHandle nativeReplica3();
+	private static native void nativeDestroyInstance(NativeHandle handle);
 
 	/// \brief Return codes for Connection_RM3::GetConstructionState() and Replica3::QueryConstruction()
 	/// \details Indicates what state the object should be in for the remote system

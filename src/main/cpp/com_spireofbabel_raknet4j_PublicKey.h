@@ -10,9 +10,9 @@ extern "C" {
 /*
  * Class:     com_spireofbabel_raknet4j_PublicKey
  * Method:    nativePublicKey
- * Signature: ()J
+ * Signature: ()Lcom/spireofbabel/raknet4j/NativeHandle;
  */
-JNIEXPORT jlong JNICALL Java_com_spireofbabel_raknet4j_PublicKey_nativePublicKey
+JNIEXPORT jobject JNICALL Java_com_spireofbabel_raknet4j_PublicKey_nativePublicKey
   (JNIEnv *, jobject);
 
 /*

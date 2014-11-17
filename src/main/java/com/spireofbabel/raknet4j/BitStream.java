@@ -9,13 +9,13 @@ public class BitStream {
         System.load(libPath);
     }
 
-    private long nativeHandle;
+    private NativeHandle nativeHandle;
 
-    public BitStream(long handle) { nativeHandle = handle; }
+    public BitStream(NativeHandle handle) { nativeHandle = handle; }
 
     public static BitStream GetInstance() { return new BitStream(nativeGetInstance()); }
     public static void DestroyInstance(BitStream i) { nativeDestroyInstance(i.nativeHandle); }
 
-    private static native long nativeGetInstance();
-    private static native long nativeDestroyInstance(long i);
+    private static native NativeHandle nativeGetInstance();
+    private static native NativeHandle nativeDestroyInstance(NativeHandle i);
 }

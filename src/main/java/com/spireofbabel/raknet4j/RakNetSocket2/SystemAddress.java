@@ -1,16 +1,20 @@
 package com.spireofbabel.raknet4j.RakNetSocket2;
 
+import com.spireofbabel.raknet4j.NativeHandle;
+
 /**
  * Created by bcarson on 11/11/14.
  */
 public class SystemAddress {
-    private long nativeHandle;
+    private NativeHandle nativeHandle;
 
-    public SystemAddress() { nativeHandle = nativeGetInstance(); }
-   	public SystemAddress(String str) { nativeHandle = nativeGetInstance(); }
-   	public SystemAddress(String str, int port) { nativeHandle = nativeGetInstance(); }
+    public SystemAddress() { nativeHandle = nativeSystemAddress(); }
+   	public SystemAddress(String str) { nativeHandle = nativeSystemAddress(str); }
+   	public SystemAddress(String str, int port) { nativeHandle = nativeSystemAddress(str, port); }
 
     // Native functions
-    private static native long nativeGetInstance();
-    private static native void nativeDestroyInstance(long i);
+    private static native NativeHandle nativeSystemAddress();
+    private static native NativeHandle nativeSystemAddress(String str);
+    private static native NativeHandle nativeSystemAddress(String str, int port);
+    public static native void nativeDestroyInstance(NativeHandle i);
 }
