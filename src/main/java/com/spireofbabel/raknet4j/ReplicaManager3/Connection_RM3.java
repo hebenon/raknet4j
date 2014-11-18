@@ -13,13 +13,12 @@ import java.util.List;
 abstract public class Connection_RM3 {
     private NativeHandle nativeHandle;
 
-    public Connection_RM3() { nativeHandle = nativeConnection_RM3(); }
-
     public Connection_RM3(SystemAddress _systemAddress, RakNetGUID _guid) {
         nativeHandle = nativeConnection_RM3(_systemAddress, _guid);
     }
 
-    private native NativeHandle nativeConnection_RM3();
+    public Connection_RM3(NativeHandle _handle) { nativeHandle = _handle; }
+
     private native NativeHandle nativeConnection_RM3(SystemAddress _systemAddress, RakNetGUID _guid);
     public native static void nativeDestroyInstance(NativeHandle handle);
 
@@ -34,7 +33,7 @@ abstract public class Connection_RM3 {
     /// \param[in] allocationIdBitstream user-defined bitstream uniquely identifying a game object type
     /// \param[in] replicaManager3 Instance of ReplicaManager3 that controls this connection
     /// \return The new replica instance
-    public native Replica3 AllocReplica(BitStream allocationIdBitstream, ReplicaManager3 replicaManager3);
+    public abstract Replica3 AllocReplica(BitStream allocationIdBitstream, ReplicaManager3 replicaManager3);
 
     /// \brief Get list of all replicas that are constructed for this connection
     /// \param[out] objectsTheyDoHave Destination list. Returned in sorted ascending order, sorted on the value of the Replica3 pointer.
@@ -47,19 +46,19 @@ abstract public class Connection_RM3 {
 
     /// When a new connection connects, before sending any objects, SerializeOnDownloadStarted() is called
     /// \param[out] bitStream Passed to DeserializeOnDownloadStarted()
-    public abstract void SerializeOnDownloadStarted(BitStream bitStream);
+    public void SerializeOnDownloadStarted(BitStream bitStream) {}
 
     /// Receives whatever was written in SerializeOnDownloadStarted()
     /// \param[in] bitStream Written in SerializeOnDownloadStarted()
-    public abstract void DeserializeOnDownloadStarted(BitStream bitStream);
+    public void DeserializeOnDownloadStarted(BitStream bitStream) {}
 
     /// When a new connection connects, after constructing and serialization all objects, SerializeOnDownloadComplete() is called
     /// \param[out] bitStream Passed to DeserializeOnDownloadComplete()
-    public abstract void SerializeOnDownloadComplete(BitStream bitStream);
+    public void SerializeOnDownloadComplete(BitStream bitStream) {}
 
     /// Receives whatever was written in DeserializeOnDownloadComplete()
     /// \param[in] bitStream Written in SerializeOnDownloadComplete()
-    public abstract void DeserializeOnDownloadComplete(BitStream bitStream);
+    public void DeserializeOnDownloadComplete(BitStream bitStream) {}
 
     /// \return The system address passed to the constructor of this object
     public native SystemAddress GetSystemAddress();

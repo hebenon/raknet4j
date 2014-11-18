@@ -33,14 +33,6 @@ JNIEXPORT void JNICALL Java_com_spireofbabel_raknet4j_ReplicaManager3_Connection
 
 /*
  * Class:     com_spireofbabel_raknet4j_ReplicaManager3_Connection_RM3
- * Method:    AllocReplica
- * Signature: (Lcom/spireofbabel/raknet4j/BitStream;Lcom/spireofbabel/raknet4j/ReplicaManager3/ReplicaManager3;)Lcom/spireofbabel/raknet4j/ReplicaManager3/Replica3;
- */
-JNIEXPORT jobject JNICALL Java_com_spireofbabel_raknet4j_ReplicaManager3_Connection_1RM3_AllocReplica
-  (JNIEnv *, jobject, jobject, jobject);
-
-/*
- * Class:     com_spireofbabel_raknet4j_ReplicaManager3_Connection_RM3
  * Method:    GetConstructedReplicas
  * Signature: (Ljava/util/List;)V
  */
