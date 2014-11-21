@@ -21,16 +21,10 @@
         <!-- Project Dependencies -->
         <dependency>
             <groupId>com.spireofbabel.raknet4j</groupId>
-            <artifactId>RakNet4J</artifactId>
+            <artifactId>raknet4j-darwin-x86_64</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.spireofbabel.raknet4j</groupId>
-            <artifactId>raknet4jNative</artifactId>
-            <version>${project.version}</version>
-            <scope>test</scope>
-            <type>dylib</type>
+            <type>jar</type>
         </dependency>
     </dependencies>
 
@@ -42,56 +36,6 @@
                     <source>1.6</source>
                     <target>1.6</target>
                 </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.9</version>
-                <executions>
-                    <execution>
-                        <id>copy</id>
-                        <phase>test-compile</phase>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>com.spireofbabel.raknet4j</groupId>
-                                    <artifactId>raknet4jNative</artifactId>
-                                    <version>${project.version}</version>
-                                    <type>dylib</type>
-                                    <overWrite>true</overWrite>
-                                    <destFileName>libRakNetNatives.dylib</destFileName>
-                                </artifactItem>
-                            </artifactItems>
-                            <outputDirectory>${project.build.directory}/test-classes/lib</outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <!-- <version>${org.codehaus.mojo.version}</version> -->
-                <executions>
-                    <execution>
-                        <id>script-chmod</id>
-                        <phase>test-compile</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                        <configuration>
-                            <executable>chmod</executable>
-                            <arguments>
-                                <argument>+x</argument>
-                                <argument>${project.build.directory}/test-classes/lib/libRakNetNatives.dylib</argument>
-                            </arguments>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
 

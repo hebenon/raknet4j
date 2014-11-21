@@ -4,6 +4,7 @@ import com.spireofbabel.raknet4j.RakNetEnums.PacketPriority;
 import com.spireofbabel.raknet4j.RakNetEnums.StartupResult;
 import com.spireofbabel.raknet4j.RakNetEnums.ConnectionAttemptResult;
 import com.spireofbabel.raknet4j.RakNetSocket2.RakNetSocket2;
+import org.scijava.nativelib.NativeLibraryUtil;
 
 /**
  * Created by bcarson on 8/11/14.
@@ -11,8 +12,7 @@ import com.spireofbabel.raknet4j.RakNetSocket2.RakNetSocket2;
 
 public class RakPeerInterface {
     static {
-        String libPath = RakPeerInterface.class.getClassLoader().getResource("lib/libRakNetNatives.dylib").getPath();
-        System.load(libPath);
+		NativeLibraryUtil.loadNativeLibrary(RakPeerInterface.class, "RakNetNatives");
     }
 
     private NativeHandle nativeHandle;

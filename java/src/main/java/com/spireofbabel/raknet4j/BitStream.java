@@ -1,12 +1,13 @@
 package com.spireofbabel.raknet4j;
 
+import org.scijava.nativelib.NativeLibraryUtil;
+
 /**
  * Created by bcarson on 13/11/14.
  */
 public class BitStream {
     static {
-        String libPath = BitStream.class.getClassLoader().getResource("lib/libRakNetNatives.dylib").getPath();
-        System.load(libPath);
+        NativeLibraryUtil.loadNativeLibrary(BitStream.class,"RakNetNatives");
     }
 
     private NativeHandle nativeHandle;

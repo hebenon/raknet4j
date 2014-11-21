@@ -7,12 +7,12 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>raknet4jNative</artifactId>
+    <artifactId>raknet4jNative-darwin-x86_64</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>RakNet4J native darwin</name>
-    <url>http://maven.apache.org</url>
+    <url>https://github.com/hebenon/raknet4j</url>
 
-    <packaging>dylib</packaging>
+    <packaging>jnilib</packaging>
 
     <dependencies>
         <dependency>

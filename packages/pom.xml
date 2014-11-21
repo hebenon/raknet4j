@@ -8,9 +8,9 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>nativeParent</artifactId>
+    <artifactId>packageParent</artifactId>
 
-    <name>RakNet4J - native parent</name>
+    <name>RakNet4J - package parent</name>
 
     <packaging>pom</packaging>
 
