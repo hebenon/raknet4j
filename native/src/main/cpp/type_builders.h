@@ -9,6 +9,8 @@
 extern "C" {
 #endif
 
+    jobject buildBitStream(JNIEnv *env, jobject handle);
+    jobject buildReplicaManager3(JNIEnv *env, jobject handle);
     jobject buildSystemAddress(JNIEnv *env, jobject handle);
     jobject buildRakNetGUID(JNIEnv *env, jobject handle);
 
