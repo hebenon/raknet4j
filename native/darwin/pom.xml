@@ -1,0 +1,96 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.spireofbabel.raknet4j</groupId>
+        <artifactId>nativeParent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>raknet4jNative</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>RakNet4J native darwin</name>
+    <url>http://maven.apache.org</url>
+
+    <packaging>jnilib</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.spireofbabel.raknet4j</groupId>
+            <artifactId>raknet4j</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>native-maven-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <!--  trigger javah -->
+                    <javahOS>darwin</javahOS>
+
+                    <compilerProvider>generic-classic</compilerProvider>
+                    <compilerExecutable>gcc</compilerExecutable>
+
+                    <linkerExecutable>gcc</linkerExecutable>
+                    <sources>
+                        <source>
+                            <directory>../src/main/cpp</directory>
+                            <includes>
+                                <include>**/*.cpp</include>
+                            </includes>
+                        </source>
+                        <source>
+                            <directory>../../../RakNet/Source</directory>
+                        </source>
+                    </sources>
+
+                    <compilerStartOptions>
+                        <compilerStartOption>-g -fPIC -c -O</compilerStartOption>
+                    </compilerStartOptions>
+
+                    <linkerStartOptions>
+                        <linkerStartOption>-g -fPIC -shared -lstdc++ -lc</linkerStartOption>
+                    </linkerStartOptions>
+
+                    <linkerEndOptions>
+                        <linkerEndOption>resources/lib/raknetx86_64.a</linkerEndOption>
+                    </linkerEndOptions>
+
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <id>javah</id>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <javahProvider>default</javahProvider>
+                            <javahOutputDirectory>${project.build.directory}/custom-javah</javahOutputDirectory>
+                            <workingDirectory>${basedir}</workingDirectory>
+                            <javahVerbose>true</javahVerbose>
+                            <javahSearchJNIFromDependencies>true</javahSearchJNIFromDependencies>
+                        </configuration>
+                        <goals>
+                            <goal>javah</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
+            </plugin>
+
+        </plugins>
+    </build>
+</project>

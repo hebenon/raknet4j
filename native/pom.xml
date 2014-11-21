@@ -1,0 +1,60 @@
+<project>
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.spireofbabel.raknet4j</groupId>
+        <artifactId>parentProject</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>nativeParent</artifactId>
+
+    <name>RakNet4J - native parent</name>
+
+    <packaging>pom</packaging>
+
+    <profiles>
+
+        <profile>
+            <id>darwin</id>
+            <activation>
+                <property>
+                    <name>platform</name>
+                    <value>darwin</value>
+                </property>
+            </activation>
+            <modules>
+                <module>darwin</module>
+            </modules>
+        </profile>
+
+        <!-- <profile>
+          <id>win32</id>
+          <activation>
+            <property>
+              <name>platform</name>
+              <value>win32</value>
+            </property>
+          </activation>
+          <modules>
+            <module>win32</module>
+          </modules>
+        </profile>
+
+        <profile>
+          <id>hpux</id>
+          <activation>
+            <property>
+              <name>platform</name>
+              <value>hpux</value>
+            </property>
+          </activation>
+          <modules>
+            <module>hpux</module>
+          </modules>
+        </profile> -->
+
+    </profiles>
+
+</project>
