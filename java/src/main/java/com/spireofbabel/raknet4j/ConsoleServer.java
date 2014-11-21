@@ -1,13 +1,14 @@
 package com.spireofbabel.raknet4j;
 
+import org.scijava.nativelib.NativeLibraryUtil;
+
 /**
  * Created by bcarson on 6/11/14.
  */
 
 public class ConsoleServer  {
     static {
-        String libPath = ConsoleServer.class.getClassLoader().getResource("lib/libRakNetNatives.jnilib").getPath();
-        System.load(libPath);
+        NativeLibraryUtil.loadNativeLibrary(BitStream.class, "RakNetNatives");
     }
 
     private NativeHandle nativeHandle;

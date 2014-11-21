@@ -4,13 +4,13 @@
     <parent>
         <groupId>com.spireofbabel.raknet4j</groupId>
         <artifactId>nativeParent</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>raknet4jNative</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>raknet4jNative-darwin-x86_64</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
     <name>RakNet4J native darwin</name>
-    <url>http://maven.apache.org</url>
+    <url>https://github.com/hebenon/raknet4j</url>
 
     <packaging>jnilib</packaging>
 
@@ -18,7 +18,7 @@
         <dependency>
             <groupId>com.spireofbabel.raknet4j</groupId>
             <artifactId>raknet4j</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.version}</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>

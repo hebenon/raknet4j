@@ -4,14 +4,14 @@ import com.spireofbabel.raknet4j.BitStream;
 import com.spireofbabel.raknet4j.NativeHandle;
 import com.spireofbabel.raknet4j.RakNetGUID;
 import com.spireofbabel.raknet4j.RakPeerInterface;
+import org.scijava.nativelib.NativeLibraryUtil;
 
 /**
  * Created by bcarson on 11/11/14.
  */
 abstract class Replica3 {
 	static {
-		 String libPath = Replica3.class.getClassLoader().getResource("lib/libRakNetNatives.jnilib").getPath();
-		 System.load(libPath);
+		NativeLibraryUtil.loadNativeLibrary(Replica3.class, "RakNetNatives");
 	}
 
 	NativeHandle nativeHandle;

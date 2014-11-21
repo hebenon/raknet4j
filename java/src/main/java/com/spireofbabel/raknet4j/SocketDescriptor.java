@@ -1,13 +1,14 @@
 package com.spireofbabel.raknet4j;
 
+import org.scijava.nativelib.NativeLibraryUtil;
+
 /**
  * Created by bcarson on 8/11/14.
  */
 
 public class SocketDescriptor {
     static {
-        String libPath = SocketDescriptor.class.getClassLoader().getResource("lib/libRakNetNatives.jnilib").getPath();
-        System.load(libPath);
+        NativeLibraryUtil.loadNativeLibrary(SocketDescriptor.class, "RakNetNatives");
     }
 
     private NativeHandle nativeHandle;

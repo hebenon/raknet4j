@@ -4,14 +4,14 @@ import com.spireofbabel.raknet4j.NativeHandle;
 import com.spireofbabel.raknet4j.PluginInterface2;
 import com.spireofbabel.raknet4j.RakNetGUID;
 import com.spireofbabel.raknet4j.RakNetSocket2.SystemAddress;
+import org.scijava.nativelib.NativeLibraryUtil;
 
 /**
  * Created by bcarson on 11/11/14.
  */
 public abstract class ReplicaManager3 extends PluginInterface2 {
     static {
-        String libPath = ReplicaManager3.class.getClassLoader().getResource("lib/libRakNetNatives.jnilib").getPath();
-        System.load(libPath);
+        NativeLibraryUtil.loadNativeLibrary(ReplicaManager3.class, "RakNetNatives");
     }
 
     private NativeHandle nativeHandle;

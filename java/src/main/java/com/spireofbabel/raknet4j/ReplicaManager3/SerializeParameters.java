@@ -1,14 +1,14 @@
 package com.spireofbabel.raknet4j.ReplicaManager3;
 
 import com.spireofbabel.raknet4j.NativeHandle;
+import org.scijava.nativelib.NativeLibraryUtil;
 
 /**
  * Created by bcarson on 13/11/14.
  */
 public class SerializeParameters {
     static {
-        String libPath = SerializeParameters.class.getClassLoader().getResource("lib/libRakNetNatives.jnilib").getPath();
-        System.load(libPath);
+        NativeLibraryUtil.loadNativeLibrary(SerializeParameters.class, "RakNetNatives");
     }
 
     private NativeHandle nativeHandle;

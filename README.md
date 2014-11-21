@@ -20,7 +20,7 @@ TODO: Maven repository.
 <dependency>
     <groupId>com.spireofbabel.raknet4j</groupId>
     <artifactId>RakNet4J</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
 </dependency>
 ```
 
