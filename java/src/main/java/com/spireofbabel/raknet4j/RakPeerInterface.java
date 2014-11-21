@@ -11,7 +11,7 @@ import com.spireofbabel.raknet4j.RakNetSocket2.RakNetSocket2;
 
 public class RakPeerInterface {
     static {
-        String libPath = RakPeerInterface.class.getClassLoader().getResource("lib/libRakNetNatives.jnilib").getPath();
+        String libPath = RakPeerInterface.class.getClassLoader().getResource("lib/libRakNetNatives.dylib").getPath();
         System.load(libPath);
     }
 

@@ -10,7 +10,7 @@ import com.spireofbabel.raknet4j.RakNetSocket2.SystemAddress;
  */
 public abstract class ReplicaManager3 extends PluginInterface2 {
     static {
-        String libPath = ReplicaManager3.class.getClassLoader().getResource("lib/libRakNetNatives.jnilib").getPath();
+        String libPath = ReplicaManager3.class.getClassLoader().getResource("lib/libRakNetNatives.dylib").getPath();
         System.load(libPath);
     }
 

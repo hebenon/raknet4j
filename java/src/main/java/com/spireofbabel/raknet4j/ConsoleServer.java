@@ -6,7 +6,7 @@ package com.spireofbabel.raknet4j;
 
 public class ConsoleServer  {
     static {
-        String libPath = ConsoleServer.class.getClassLoader().getResource("lib/libRakNetNatives.jnilib").getPath();
+        String libPath = ConsoleServer.class.getClassLoader().getResource("lib/libRakNetNatives.dylib").getPath();
         System.load(libPath);
     }
 

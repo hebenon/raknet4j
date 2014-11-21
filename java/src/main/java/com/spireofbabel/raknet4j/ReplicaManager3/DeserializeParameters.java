@@ -7,7 +7,7 @@ import com.spireofbabel.raknet4j.NativeHandle;
  */
 public class DeserializeParameters {
     static {
-        String libPath = DeserializeParameters.class.getClassLoader().getResource("lib/libRakNetNatives.jnilib").getPath();
+        String libPath = DeserializeParameters.class.getClassLoader().getResource("lib/libRakNetNatives.dylib").getPath();
         System.load(libPath);
     }
 

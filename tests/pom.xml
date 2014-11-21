@@ -30,7 +30,7 @@
             <artifactId>raknet4jNative</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
-            <type>jnilib</type>
+            <type>dylib</type>
         </dependency>
     </dependencies>
 
@@ -61,9 +61,9 @@
                                     <groupId>com.spireofbabel.raknet4j</groupId>
                                     <artifactId>raknet4jNative</artifactId>
                                     <version>${project.version}</version>
-                                    <type>jnilib</type>
+                                    <type>dylib</type>
                                     <overWrite>true</overWrite>
-                                    <destFileName>libRakNetNatives.jnilib</destFileName>
+                                    <destFileName>libRakNetNatives.dylib</destFileName>
                                 </artifactItem>
                             </artifactItems>
                             <outputDirectory>${project.build.directory}/test-classes/lib</outputDirectory>
@@ -87,7 +87,7 @@
                             <executable>chmod</executable>
                             <arguments>
                                 <argument>+x</argument>
-                                <argument>${project.build.directory}/test-classes/lib/libRakNetNatives.jnilib</argument>
+                                <argument>${project.build.directory}/test-classes/lib/libRakNetNatives.dylib</argument>
                             </arguments>
                         </configuration>
                     </execution>

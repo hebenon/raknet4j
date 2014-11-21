@@ -10,7 +10,7 @@ import com.spireofbabel.raknet4j.RakPeerInterface;
  */
 abstract class Replica3 {
 	static {
-		 String libPath = Replica3.class.getClassLoader().getResource("lib/libRakNetNatives.jnilib").getPath();
+		 String libPath = Replica3.class.getClassLoader().getResource("lib/libRakNetNatives.dylib").getPath();
 		 System.load(libPath);
 	}
 

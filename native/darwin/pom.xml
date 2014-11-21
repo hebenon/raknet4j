@@ -12,7 +12,7 @@
     <name>RakNet4J native darwin</name>
     <url>http://maven.apache.org</url>
 
-    <packaging>jnilib</packaging>
+    <packaging>dylib</packaging>
 
     <dependencies>
         <dependency>

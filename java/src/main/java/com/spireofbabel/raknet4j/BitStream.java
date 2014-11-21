@@ -5,7 +5,7 @@ package com.spireofbabel.raknet4j;
  */
 public class BitStream {
     static {
-        String libPath = BitStream.class.getClassLoader().getResource("lib/libRakNetNatives.jnilib").getPath();
+        String libPath = BitStream.class.getClassLoader().getResource("lib/libRakNetNatives.dylib").getPath();
         System.load(libPath);
     }
 

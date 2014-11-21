@@ -5,7 +5,7 @@ package com.spireofbabel.raknet4j;
  */
 public class RakNetGUID {
     static {
-        String libPath = RakNetGUID.class.getClassLoader().getResource("lib/libRakNetNatives.jnilib").getPath();
+        String libPath = RakNetGUID.class.getClassLoader().getResource("lib/libRakNetNatives.dylib").getPath();
         System.load(libPath);
     }
 
