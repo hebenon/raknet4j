@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.spireofbabel.raknet4j</groupId>
         <artifactId>parentProject</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>raknet4jTests</artifactId>
@@ -22,13 +22,13 @@
         <dependency>
             <groupId>com.spireofbabel.raknet4j</groupId>
             <artifactId>RakNet4J</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.spireofbabel.raknet4j</groupId>
             <artifactId>raknet4jNative</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.version}</version>
             <scope>test</scope>
             <type>jnilib</type>
         </dependency>
@@ -60,7 +60,7 @@
                                 <artifactItem>
                                     <groupId>com.spireofbabel.raknet4j</groupId>
                                     <artifactId>raknet4jNative</artifactId>
-                                    <version>1.0-SNAPSHOT</version>
+                                    <version>${project.version}</version>
                                     <type>jnilib</type>
                                     <overWrite>true</overWrite>
                                     <destFileName>libRakNetNatives.jnilib</destFileName>
