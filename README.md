@@ -19,7 +19,7 @@ TODO: Maven repository.
 ```xml
 <dependency>
     <groupId>com.spireofbabel.raknet4j</groupId>
-    <artifactId>RakNet4J</artifactId>
+    <artifactId>raknet4j-darwin-x86_64</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 </dependency>
 ```
