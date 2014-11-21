@@ -59,11 +59,11 @@
                     </sources>
 
                     <compilerStartOptions>
-                        <compilerStartOption>-g -fPIC -c</compilerStartOption>
+                        <compilerStartOption>-g -fPIC -c -O</compilerStartOption>
                     </compilerStartOptions>
 
                     <linkerStartOptions>
-                        <linkerStartOption>-g -fPIC -shared -lstdc++</linkerStartOption>
+                        <linkerStartOption>-g -fPIC -shared -lstdc++ -lc</linkerStartOption>
                     </linkerStartOptions>
 
                     <linkerEndOptions>
@@ -90,6 +90,7 @@
                 </executions>
 
             </plugin>
+
         </plugins>
     </build>
 </project>

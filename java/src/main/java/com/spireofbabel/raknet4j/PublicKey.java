@@ -6,7 +6,7 @@ package com.spireofbabel.raknet4j;
 
 public class PublicKey {
     static {
-        String libPath = PublicKey.class.getClassLoader().getResource("dylib/libRakNetNatives.dylib").getPath();
+        String libPath = PublicKey.class.getClassLoader().getResource("lib/libRakNetNatives.jnilib").getPath();
         System.load(libPath);
     }
 

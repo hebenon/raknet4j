@@ -5,12 +5,12 @@
 
 using namespace RakNet;
 
-JNIEXPORT jobject JNICALL Java_com_spireofbabel_raknet4j_ConsoleServer_nativeGetInstance
+/*JNIEXPORT jobject JNICALL Java_com_spireofbabel_raknet4j_ConsoleServer_nativeGetInstance
   (JNIEnv *env, jclass)
 {
     ConsoleServer *instance = ConsoleServer :: GetInstance();
 
-    return createHandleObject<ConsoleServer>(env,instance);
+    return createHandleObject<ConsoleServer>(env, instance);
 }
 
 JNIEXPORT void JNICALL Java_com_spireofbabel_raknet4j_ConsoleServer_nativeDestroyInstance
@@ -19,4 +19,4 @@ JNIEXPORT void JNICALL Java_com_spireofbabel_raknet4j_ConsoleServer_nativeDestro
     ConsoleServer *instance = getHandle<ConsoleServer>(env, handle);
 
     ConsoleServer :: DestroyInstance(instance);
-}
+}*/

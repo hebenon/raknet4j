@@ -6,7 +6,7 @@ package com.spireofbabel.raknet4j;
 
 public class SocketDescriptor {
     static {
-        String libPath = SocketDescriptor.class.getClassLoader().getResource("dylib/libRakNetNatives.dylib").getPath();
+        String libPath = SocketDescriptor.class.getClassLoader().getResource("lib/libRakNetNatives.jnilib").getPath();
         System.load(libPath);
     }
 
