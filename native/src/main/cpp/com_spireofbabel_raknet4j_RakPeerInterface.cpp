@@ -179,3 +179,18 @@ JNIEXPORT void JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_AttachPlu
     
     instance->AttachPlugin(plugin);
 }
+
+/*
+ * Class:     com_spireofbabel_raknet4j_RakPeerInterface
+ * Method:    DetachPlugin
+ * Signature: (Lcom/spireofbabel/raknet4j/PluginInterface2;)V
+ */
+JNIEXPORT void JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_DetachPlugin
+(JNIEnv *env, jobject object, jobject pluginObject)
+{
+    RakPeerInterface *instance = getHandle<RakPeerInterface>(env, object);
+
+    PluginInterface2 *plugin = getHandle<PluginInterface2>(env, pluginObject);
+
+    instance->DetachPlugin(plugin);
+}
