@@ -3,7 +3,7 @@ package com.spireofbabel.raknet4j.ReplicaManager3;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
-import com.spireofbabel.raknet4j.RakNetEnums;
+import com.spireofbabel.raknet4j.RakNetEnums.StartupResult;
 import com.spireofbabel.raknet4j.RakNetGUID;
 import com.spireofbabel.raknet4j.RakNetSocket2.SystemAddress;
 import com.spireofbabel.raknet4j.RakPeerInterface;
@@ -21,7 +21,7 @@ public class ReplicaManager3Test {
         SocketDescriptor[] descriptors = new SocketDescriptor[1];
         descriptors[0] = new SocketDescriptor((short)8196, "");
 
-        assertThat(instance.Startup(1, descriptors, -99999), is(RakNetEnums.StartupResult.RAKNET_STARTED));
+        assertThat(instance.Startup(1, descriptors, -99999), is(StartupResult.RAKNET_STARTED));
 
         // Create an instance and add it to the peer.
         ReplicaManager3 replicaManager3 = new ReplicaManager3() {

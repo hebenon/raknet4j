@@ -168,6 +168,94 @@ JNIEXPORT jboolean JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_IsAct
 
 /*
  * Class:     com_spireofbabel_raknet4j_RakPeerInterface
+ * Method:    GetNextSendReceipt
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_GetNextSendReceipt
+(JNIEnv *env, jobject object)
+{
+    RakPeerInterface *instance = getHandle<RakPeerInterface>(env, object);
+
+    return (jlong)instance->GetNextSendReceipt();
+}
+
+/*
+ * Class:     com_spireofbabel_raknet4j_RakPeerInterface
+ * Method:    IncrementNextSendReceipt
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_IncrementNextSendReceipt
+(JNIEnv *env, jobject object)
+{
+    RakPeerInterface *instance = getHandle<RakPeerInterface>(env, object);
+
+    return (jlong)instance->IncrementNextSendReceipt();
+}
+
+/*
+ * Class:     com_spireofbabel_raknet4j_RakPeerInterface
+ * Method:    Send
+ * Signature: ([BLcom/spireofbabel/raknet4j/RakNetEnums/PacketPriority;Lcom/spireofbabel/raknet4j/RakNetEnums/PacketReliability;ILcom/spireofbabel/raknet4j/AddressOrGUID;ZJ)J
+ */
+JNIEXPORT jlong JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_Send___3BLcom_spireofbabel_raknet4j_RakNetEnums_PacketPriority_2Lcom_spireofbabel_raknet4j_RakNetEnums_PacketReliability_2ILcom_spireofbabel_raknet4j_AddressOrGUID_2ZJ
+(JNIEnv *env, jobject object, jbyteArray data, jobject priority, jobject reliability, jint orderingChannel, jobject systemIdentifier, jboolean broadcast, jlong forceReceiptNumber)
+{
+    RakPeerInterface *instance = getHandle<RakPeerInterface>(env, object);
+
+    // Marshal arguments
+    int dataLen = env->GetArrayLength(data);
+    char* nativeData = new char[dataLen];
+    env->GetByteArrayRegion(data, 0, dataLen, reinterpret_cast<jbyte*>(nativeData));
+
+    AddressOrGUID *nativeSystemIdentifier = getHandle<AddressOrGUID>(env, systemIdentifier);
+
+    // Make the call
+    uint32_t result = instance->Send(nativeData, dataLen, convertPacketPriority(env, priority), convertPacketReliability(env, reliability), (char)orderingChannel, *nativeSystemIdentifier, (bool)broadcast, (uint32_t)forceReceiptNumber );
+
+    delete [] nativeData;
+
+    return (jlong)result;
+}
+
+/*
+ * Class:     com_spireofbabel_raknet4j_RakPeerInterface
+ * Method:    SendLoopback
+ * Signature: ([B)V
+ */
+JNIEXPORT void JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_SendLoopback
+(JNIEnv *env, jobject object, jbyteArray data)
+{
+    RakPeerInterface *instance = getHandle<RakPeerInterface>(env, object);
+
+    // Marshal arguments
+    int dataLen = env->GetArrayLength(data);
+    char* nativeData = new char[dataLen];
+    env->GetByteArrayRegion(data, 0, dataLen, reinterpret_cast<jbyte*>(nativeData));
+
+    // Make the calls
+    instance->SendLoopback(nativeData, dataLen);
+
+    delete [] nativeData;
+}
+
+/*
+ * Class:     com_spireofbabel_raknet4j_RakPeerInterface
+ * Method:    Send
+ * Signature: (Lcom/spireofbabel/raknet4j/BitStream;Lcom/spireofbabel/raknet4j/RakNetEnums/PacketPriority;Lcom/spireofbabel/raknet4j/RakNetEnums/PacketReliability;ILcom/spireofbabel/raknet4j/AddressOrGUID;ZJ)J
+ */
+JNIEXPORT jlong JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_Send__Lcom_spireofbabel_raknet4j_BitStream_2Lcom_spireofbabel_raknet4j_RakNetEnums_PacketPriority_2Lcom_spireofbabel_raknet4j_RakNetEnums_PacketReliability_2ILcom_spireofbabel_raknet4j_AddressOrGUID_2ZJ
+  (JNIEnv *, jobject, jobject, jobject, jobject, jint, jobject, jboolean, jlong);
+
+/*
+ * Class:     com_spireofbabel_raknet4j_RakPeerInterface
+ * Method:    SendList
+ * Signature: ([[BLcom/spireofbabel/raknet4j/RakNetEnums/PacketPriority;Lcom/spireofbabel/raknet4j/RakNetEnums/PacketReliability;ILcom/spireofbabel/raknet4j/AddressOrGUID;ZJ)J
+ */
+JNIEXPORT jlong JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_SendList
+  (JNIEnv *, jobject, jobjectArray, jobject, jobject, jint, jobject, jboolean, jlong);
+
+/*
+ * Class:     com_spireofbabel_raknet4j_RakPeerInterface
  * Method:    Receive
  * Signature: ()Lcom/spireofbabel/raknet4j/Packet;
  */

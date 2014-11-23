@@ -1,6 +1,7 @@
 package com.spireofbabel.raknet4j;
 
 import com.spireofbabel.raknet4j.RakNetEnums.PacketPriority;
+import com.spireofbabel.raknet4j.RakNetEnums.PacketReliability;
 import com.spireofbabel.raknet4j.RakNetEnums.StartupResult;
 import com.spireofbabel.raknet4j.RakNetEnums.ConnectionAttemptResult;
 import com.spireofbabel.raknet4j.RakNetSocket2.RakNetSocket2;
@@ -153,6 +154,80 @@ public class RakPeerInterface {
 	/// Returns if the network thread is running
 	/// \return true if the network thread is running, false otherwise
 	public native boolean IsActive();
+
+	/// Returns the next uint32_t that Send() will return
+	/// \note If using RakPeer from multiple threads, this may not be accurate for your thread. Use IncrementNextSendReceipt() in that case.
+	/// \return The next uint32_t that Send() or SendList will return
+	public native long GetNextSendReceipt();
+
+	/// Returns the next uint32_t that Send() will return, and increments the value by one
+	/// \note If using RakPeer from multiple threads, pass this to forceReceipt in the send function
+	/// \return The next uint32_t that Send() or SendList will return
+	public native long IncrementNextSendReceipt();
+
+	/// Sends a block of data to the specified system that you are connected to.
+	/// This function only works while connected
+	/// The first byte should be a message identifier starting at ID_USER_PACKET_ENUM
+	/// \param[in] data The block of data to send
+	/// \param[in] length The size in bytes of the data to send
+	/// \param[in] priority What priority level to send on.  See PacketPriority.h
+	/// \param[in] reliability How reliability to send this data.  See PacketPriority.h
+	/// \param[in] orderingChannel When using ordered or sequenced messages, what channel to order these on. Messages are only ordered relative to other messages on the same stream
+	/// \param[in] systemIdentifier Who to send this packet to, or in the case of broadcasting who not to send it to.  Pass either a SystemAddress structure or a RakNetGUID structure. Use UNASSIGNED_SYSTEM_ADDRESS or to specify none
+	/// \param[in] broadcast True to send this packet to all connected systems. If true, then systemAddress specifies who not to send the packet to.
+	/// \param[in] forceReceipt If 0, will automatically determine the receipt number to return. If non-zero, will return what you give it.
+	/// \return 0 on bad input. Otherwise a number that identifies this message. If \a reliability is a type that returns a receipt, on a later call to Receive() you will get ID_SND_RECEIPT_ACKED or ID_SND_RECEIPT_LOSS with bytes 1-4 inclusive containing this number
+	public native long Send( byte [] data, PacketPriority priority, PacketReliability reliability, int orderingChannel, AddressOrGUID systemIdentifier, boolean broadcast, long forceReceiptNumber );
+	public long Send( byte [] data, PacketPriority priority, PacketReliability reliability, int orderingChannel, AddressOrGUID systemIdentifier, boolean broadcast) {
+		return Send(data, priority, reliability, orderingChannel, systemIdentifier, broadcast, 0);
+	}
+
+	/// "Send" to yourself rather than a remote system. The message will be processed through the plugins and returned to the game as usual
+	/// This function works anytime
+	/// The first byte should be a message identifier starting at ID_USER_PACKET_ENUM
+	/// \param[in] data The block of data to send
+	/// \param[in] length The size in bytes of the data to send
+	public native void SendLoopback( byte [] data );
+
+	/// Sends a block of data to the specified system that you are connected to.  Same as the above version, but takes a BitStream as input.
+	/// \param[in] bitStream The bitstream to send
+	/// \param[in] priority What priority level to send on.  See PacketPriority.h
+	/// \param[in] reliability How reliability to send this data.  See PacketPriority.h
+	/// \param[in] orderingChannel When using ordered or sequenced messages, what channel to order these on. Messages are only ordered relative to other messages on the same stream
+	/// \param[in] systemIdentifier Who to send this packet to, or in the case of broadcasting who not to send it to. Pass either a SystemAddress structure or a RakNetGUID structure. Use UNASSIGNED_SYSTEM_ADDRESS or to specify none
+	/// \param[in] broadcast True to send this packet to all connected systems. If true, then systemAddress specifies who not to send the packet to.
+	/// \param[in] forceReceipt If 0, will automatically determine the receipt number to return. If non-zero, will return what you give it.
+	/// \return 0 on bad input. Otherwise a number that identifies this message. If \a reliability is a type that returns a receipt, on a later call to Receive() you will get ID_SND_RECEIPT_ACKED or ID_SND_RECEIPT_LOSS with bytes 1-4 inclusive containing this number
+	/// \note COMMON MISTAKE: When writing the first byte, bitStream->Write((unsigned char) ID_MY_TYPE) be sure it is casted to a byte, and you are not writing a 4 byte enumeration.
+	public native long Send( BitStream bitStream, PacketPriority priority, PacketReliability reliability, int orderingChannel, AddressOrGUID systemIdentifier, boolean broadcast, long forceReceiptNumber );
+	public long Send( BitStream bitStream, PacketPriority priority, PacketReliability reliability, int orderingChannel, AddressOrGUID systemIdentifier, boolean broadcast ) {
+		return Send(bitStream, priority, reliability, orderingChannel, systemIdentifier, broadcast, 0 );
+	}
+
+	/// Sends multiple blocks of data, concatenating them automatically.
+	///
+	/// This is equivalent to:
+	/// RakNet::BitStream bs;
+	/// bs.WriteAlignedBytes(block1, blockLength1);
+	/// bs.WriteAlignedBytes(block2, blockLength2);
+	/// bs.WriteAlignedBytes(block3, blockLength3);
+	/// Send(&bs, ...)
+	///
+	/// This function only works while connected
+	/// \param[in] data An array of pointers to blocks of data
+	/// \param[in] lengths An array of integers indicating the length of each block of data
+	/// \param[in] numParameters Length of the arrays data and lengths
+	/// \param[in] priority What priority level to send on.  See PacketPriority.h
+	/// \param[in] reliability How reliability to send this data.  See PacketPriority.h
+	/// \param[in] orderingChannel When using ordered or sequenced messages, what channel to order these on. Messages are only ordered relative to other messages on the same stream
+	/// \param[in] systemIdentifier Who to send this packet to, or in the case of broadcasting who not to send it to. Pass either a SystemAddress structure or a RakNetGUID structure. Use UNASSIGNED_SYSTEM_ADDRESS or to specify none
+	/// \param[in] broadcast True to send this packet to all connected systems. If true, then systemAddress specifies who not to send the packet to.
+	/// \param[in] forceReceipt If 0, will automatically determine the receipt number to return. If non-zero, will return what you give it.
+	/// \return 0 on bad input. Otherwise a number that identifies this message. If \a reliability is a type that returns a receipt, on a later call to Receive() you will get ID_SND_RECEIPT_ACKED or ID_SND_RECEIPT_LOSS with bytes 1-4 inclusive containing this number
+	public native long SendList( byte [][] data, PacketPriority priority, PacketReliability reliability, int orderingChannel, AddressOrGUID systemIdentifier, boolean broadcast, long forceReceiptNumber );
+	public long SendList( byte [][] data, PacketPriority priority, PacketReliability reliability, int orderingChannel, AddressOrGUID systemIdentifier, boolean broadcast ) {
+		return SendList( data, priority, reliability, orderingChannel, systemIdentifier, broadcast, 0);
+	}
 
 	/// Gets a message from the incoming message queue.
 	/// Use DeallocatePacket() to deallocate the message after you are done with it.

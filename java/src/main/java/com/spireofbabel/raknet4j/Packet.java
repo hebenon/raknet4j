@@ -18,6 +18,10 @@ public class Packet {
     }
     private native NativeHandle nativePacket();
 
+    public Packet(NativeHandle handle) {
+        nativeHandle = handle;
+    }
+
     public native SystemAddress getSystemAddress();
     public native void setSystemAddress(SystemAddress address);
 

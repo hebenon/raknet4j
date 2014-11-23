@@ -13,8 +13,8 @@ public class SystemAddress {
    	public SystemAddress(String str, int port) { nativeHandle = nativeSystemAddress(str, port); }
 
     // Native functions
-    private static native NativeHandle nativeSystemAddress();
-    private static native NativeHandle nativeSystemAddress(String str);
-    private static native NativeHandle nativeSystemAddress(String str, int port);
+    private native NativeHandle nativeSystemAddress();
+    private native NativeHandle nativeSystemAddress(String str);
+    private native NativeHandle nativeSystemAddress(String str, int port);
     public static native void nativeDestroyInstance(NativeHandle i);
 }
