@@ -71,4 +71,13 @@ public class RakPeerInterfaceTest {
         RakPeerInterface.DestroyInstance(serverPeer);
         RakPeerInterface.DestroyInstance(clientPeer);
     }
+
+    @Test
+    public void TestReceiveShouldReturnNullIfNoPacketPending() {
+        RakPeerInterface instance = RakPeerInterface.GetInstance();
+
+        assertThat(instance.Receive(), is(nullValue()));
+
+        RakPeerInterface.DestroyInstance(instance);
+    }
 }

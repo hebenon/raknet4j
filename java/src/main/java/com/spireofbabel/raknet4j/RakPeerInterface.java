@@ -154,6 +154,18 @@ public class RakPeerInterface {
 	/// \return true if the network thread is running, false otherwise
 	public native boolean IsActive();
 
+	/// Gets a message from the incoming message queue.
+	/// Use DeallocatePacket() to deallocate the message after you are done with it.
+	/// User-thread functions, such as RPC calls and the plugin function PluginInterface::Update occur here.
+	/// \return 0 if no packets are waiting to be handled, otherwise a pointer to a packet.
+	/// \note COMMON MISTAKE: Be sure to call this in a loop, once per game tick, until it returns 0. If you only process one packet per game tick they will buffer up.
+	/// sa RakNetTypes.h contains struct Packet
+	public native Packet Receive();
+
+	/// Call this to deallocate a message returned by Receive() when you are done handling it.
+	/// \param[in] packet The message to deallocate.
+	public native void DeallocatePacket( Packet packet );
+
 	// -------------------------------------------------------------------------------------------- Plugin Functions--------------------------------------------------------------------------------------------
 	/// \brief Attaches a Plugin interface to an instance of the base class (RakPeer or PacketizedTCP) to run code automatically on message receipt in the Receive call.
 	/// If the plugin returns false from PluginInterface::UsesReliabilityLayer(), which is the case for all plugins except PacketLogger, you can call AttachPlugin() and DetachPlugin() for this plugin while RakPeer is active.

@@ -6,6 +6,7 @@
 
 #include "handle.h"
 #include "enum_conversions.h"
+#include "type_builders.h"
 
 using namespace RakNet;
 
@@ -163,6 +164,41 @@ JNIEXPORT jboolean JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_IsAct
     RakPeerInterface *instance = getHandle<RakPeerInterface>(env, object);
 
     return (jboolean)instance->IsActive();
+}
+
+/*
+ * Class:     com_spireofbabel_raknet4j_RakPeerInterface
+ * Method:    Receive
+ * Signature: ()Lcom/spireofbabel/raknet4j/Packet;
+ */
+JNIEXPORT jobject JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_Receive
+(JNIEnv *env, jobject object)
+{
+    RakPeerInterface *instance = getHandle<RakPeerInterface>(env, object);
+
+    Packet *packet = instance->Receive();
+
+    // Result could be null, or valid
+    if(!packet)
+    {
+        return 0;
+    } else {
+        return buildPacket(env, createHandleObject<Packet>(env, packet));
+    }
+}
+
+/*
+ * Class:     com_spireofbabel_raknet4j_RakPeerInterface
+ * Method:    DeallocatePacket
+ * Signature: (Lcom/spireofbabel/raknet4j/Packet;)V
+ */
+JNIEXPORT void JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_DeallocatePacket
+(JNIEnv *env, jobject object, jobject packet)
+{
+    RakPeerInterface *instance = getHandle<RakPeerInterface>(env, object);
+    Packet *nativePacket = getHandle<Packet>(env, packet);
+
+    instance->DeallocatePacket(nativePacket);
 }
 
 /*
