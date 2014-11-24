@@ -6,6 +6,7 @@
 
 #include "handle.h"
 #include "enum_conversions.h"
+#include "type_builders.h"
 
 using namespace RakNet;
 
@@ -163,6 +164,178 @@ JNIEXPORT jboolean JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_IsAct
     RakPeerInterface *instance = getHandle<RakPeerInterface>(env, object);
 
     return (jboolean)instance->IsActive();
+}
+
+/*
+ * Class:     com_spireofbabel_raknet4j_RakPeerInterface
+ * Method:    GetNextSendReceipt
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_GetNextSendReceipt
+(JNIEnv *env, jobject object)
+{
+    RakPeerInterface *instance = getHandle<RakPeerInterface>(env, object);
+
+    return (jlong)instance->GetNextSendReceipt();
+}
+
+/*
+ * Class:     com_spireofbabel_raknet4j_RakPeerInterface
+ * Method:    IncrementNextSendReceipt
+ * Signature: ()J
+ */
+JNIEXPORT jlong JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_IncrementNextSendReceipt
+(JNIEnv *env, jobject object)
+{
+    RakPeerInterface *instance = getHandle<RakPeerInterface>(env, object);
+
+    return (jlong)instance->IncrementNextSendReceipt();
+}
+
+/*
+ * Class:     com_spireofbabel_raknet4j_RakPeerInterface
+ * Method:    Send
+ * Signature: ([BLcom/spireofbabel/raknet4j/RakNetEnums/PacketPriority;Lcom/spireofbabel/raknet4j/RakNetEnums/PacketReliability;ILcom/spireofbabel/raknet4j/AddressOrGUID;ZJ)J
+ */
+JNIEXPORT jlong JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_Send___3BLcom_spireofbabel_raknet4j_RakNetEnums_PacketPriority_2Lcom_spireofbabel_raknet4j_RakNetEnums_PacketReliability_2ILcom_spireofbabel_raknet4j_AddressOrGUID_2ZJ
+(JNIEnv *env, jobject object, jbyteArray data, jobject priority, jobject reliability, jint orderingChannel, jobject systemIdentifier, jboolean broadcast, jlong forceReceiptNumber)
+{
+    RakPeerInterface *instance = getHandle<RakPeerInterface>(env, object);
+
+    // Marshal arguments
+    int dataLen = env->GetArrayLength(data);
+    char* nativeData = new char[dataLen];
+    env->GetByteArrayRegion(data, 0, dataLen, reinterpret_cast<jbyte*>(nativeData));
+
+    AddressOrGUID *nativeSystemIdentifier = getHandle<AddressOrGUID>(env, systemIdentifier);
+
+    // Make the call
+    uint32_t result = instance->Send(nativeData, dataLen, convertPacketPriority(env, priority), convertPacketReliability(env, reliability), (char)orderingChannel, *nativeSystemIdentifier, (bool)broadcast, (uint32_t)forceReceiptNumber );
+
+    delete [] nativeData;
+
+    return (jlong)result;
+}
+
+/*
+ * Class:     com_spireofbabel_raknet4j_RakPeerInterface
+ * Method:    SendLoopback
+ * Signature: ([B)V
+ */
+JNIEXPORT void JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_SendLoopback
+(JNIEnv *env, jobject object, jbyteArray data)
+{
+    RakPeerInterface *instance = getHandle<RakPeerInterface>(env, object);
+
+    // Marshal arguments
+    int dataLen = env->GetArrayLength(data);
+    char* nativeData = new char[dataLen];
+    env->GetByteArrayRegion(data, 0, dataLen, reinterpret_cast<jbyte*>(nativeData));
+
+    // Make the calls
+    instance->SendLoopback(nativeData, dataLen);
+
+    delete [] nativeData;
+}
+
+/*
+ * Class:     com_spireofbabel_raknet4j_RakPeerInterface
+ * Method:    Send
+ * Signature: (Lcom/spireofbabel/raknet4j/BitStream;Lcom/spireofbabel/raknet4j/RakNetEnums/PacketPriority;Lcom/spireofbabel/raknet4j/RakNetEnums/PacketReliability;ILcom/spireofbabel/raknet4j/AddressOrGUID;ZJ)J
+ */
+JNIEXPORT jlong JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_Send__Lcom_spireofbabel_raknet4j_BitStream_2Lcom_spireofbabel_raknet4j_RakNetEnums_PacketPriority_2Lcom_spireofbabel_raknet4j_RakNetEnums_PacketReliability_2ILcom_spireofbabel_raknet4j_AddressOrGUID_2ZJ
+(JNIEnv *env, jobject object, jobject bitStream, jobject priority, jobject reliability, jint orderingChannel, jobject systemIdentifier, jboolean broadcast, jlong forceReceiptNumber)
+{
+    RakPeerInterface *instance = getHandle<RakPeerInterface>(env, object);
+
+    // Marshal arguments
+    BitStream *nativeBitStream = getHandle<BitStream>(env, bitStream);
+
+    AddressOrGUID *nativeSystemIdentifier = getHandle<AddressOrGUID>(env, systemIdentifier);
+
+    // Make the call
+    uint32_t result = instance->Send(nativeBitStream, convertPacketPriority(env, priority), convertPacketReliability(env, reliability), (char)orderingChannel, *nativeSystemIdentifier, (bool)broadcast, (uint32_t)forceReceiptNumber );
+
+    return (jlong)result;
+}
+
+/*
+ * Class:     com_spireofbabel_raknet4j_RakPeerInterface
+ * Method:    SendList
+ * Signature: ([[BLcom/spireofbabel/raknet4j/RakNetEnums/PacketPriority;Lcom/spireofbabel/raknet4j/RakNetEnums/PacketReliability;ILcom/spireofbabel/raknet4j/AddressOrGUID;ZJ)J
+ */
+JNIEXPORT jlong JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_SendList
+(JNIEnv *env, jobject object, jobjectArray arrayOfArrays, jobject priority, jobject reliability, jint orderingChannel, jobject systemIdentifier, jboolean broadcast, jlong forceReceiptNumber)
+{
+    RakPeerInterface *instance = getHandle<RakPeerInterface>(env, object);
+
+    // Marshal arguments
+    int numArrays = env->GetArrayLength(arrayOfArrays);
+    char** nativeData = new char*[numArrays];
+    int* lengths = new int[numArrays];
+
+    for(int i = 0; i < numArrays; i++)
+    {
+        jbyteArray row = (jbyteArray)env->GetObjectArrayElement(arrayOfArrays, i);
+
+        int dataLen = env->GetArrayLength(row);
+        nativeData[i] = new char[dataLen];
+        env->GetByteArrayRegion(row, 0, dataLen, reinterpret_cast<jbyte*>(nativeData[i]));
+
+        lengths[i] = dataLen;
+    }
+
+    AddressOrGUID *nativeSystemIdentifier = getHandle<AddressOrGUID>(env, systemIdentifier);
+
+    // Make the call
+    uint32_t result = instance->SendList(const_cast<const char **>(nativeData), lengths, numArrays, convertPacketPriority(env, priority), convertPacketReliability(env, reliability), (char)orderingChannel, *nativeSystemIdentifier, (bool)broadcast, (uint32_t)forceReceiptNumber );
+
+    // Clean up the data we allocated.
+    for(int i = 0; i < numArrays; i++)
+    {
+        delete [] nativeData[i];
+    }
+
+    delete [] nativeData;
+
+    delete [] lengths;
+
+    return (jlong)result;
+}
+
+/*
+ * Class:     com_spireofbabel_raknet4j_RakPeerInterface
+ * Method:    Receive
+ * Signature: ()Lcom/spireofbabel/raknet4j/Packet;
+ */
+JNIEXPORT jobject JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_Receive
+(JNIEnv *env, jobject object)
+{
+    RakPeerInterface *instance = getHandle<RakPeerInterface>(env, object);
+
+    Packet *packet = instance->Receive();
+
+    // Result could be null, or valid
+    if(!packet)
+    {
+        return 0;
+    } else {
+        return buildPacket(env, createHandleObject<Packet>(env, packet));
+    }
+}
+
+/*
+ * Class:     com_spireofbabel_raknet4j_RakPeerInterface
+ * Method:    DeallocatePacket
+ * Signature: (Lcom/spireofbabel/raknet4j/Packet;)V
+ */
+JNIEXPORT void JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_DeallocatePacket
+(JNIEnv *env, jobject object, jobject packet)
+{
+    RakPeerInterface *instance = getHandle<RakPeerInterface>(env, object);
+    Packet *nativePacket = getHandle<Packet>(env, packet);
+
+    instance->DeallocatePacket(nativePacket);
 }
 
 /*

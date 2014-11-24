@@ -15,6 +15,8 @@ jobject convertConnectionAttemptResult(JNIEnv *env, RakNet::ConnectionAttemptRes
 
 PacketPriority convertPacketPriority(JNIEnv *env, jobject packetPriorityEnum);
 
+PacketReliability convertPacketReliability(JNIEnv *env, jobject packetReliabilityEnum);
+
 #ifdef __cplusplus
 }
 #endif
