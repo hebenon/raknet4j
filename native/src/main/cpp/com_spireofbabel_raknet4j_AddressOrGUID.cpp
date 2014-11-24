@@ -9,6 +9,19 @@ using namespace RakNet;
 /*
  * Class:     com_spireofbabel_raknet4j_AddressOrGUID
  * Method:    nativeAddressOrGUID
+ * Signature: ()Lcom/spireofbabel/raknet4j/NativeHandle;
+ */
+JNIEXPORT jobject JNICALL Java_com_spireofbabel_raknet4j_AddressOrGUID_nativeAddressOrGUID__
+(JNIEnv *env, jobject object)
+{
+    AddressOrGUID *instance = new AddressOrGUID(UNASSIGNED_SYSTEM_ADDRESS);
+
+    return createHandleObject<AddressOrGUID>(env, instance);
+}
+
+/*
+ * Class:     com_spireofbabel_raknet4j_AddressOrGUID
+ * Method:    nativeAddressOrGUID
  * Signature: (Lcom/spireofbabel/raknet4j/AddressOrGUID;)Lcom/spireofbabel/raknet4j/NativeHandle;
  */
 JNIEXPORT jobject JNICALL Java_com_spireofbabel_raknet4j_AddressOrGUID_nativeAddressOrGUID__Lcom_spireofbabel_raknet4j_AddressOrGUID_2
@@ -49,4 +62,17 @@ JNIEXPORT jobject JNICALL Java_com_spireofbabel_raknet4j_AddressOrGUID_nativeAdd
     AddressOrGUID *instance = new AddressOrGUID(*nativeGUID);
 
     return createHandleObject<AddressOrGUID>(env, instance);
+}
+
+/*
+ * Class:     com_spireofbabel_raknet4j_AddressOrGUID
+ * Method:    nativeDestroyInstance
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_com_spireofbabel_raknet4j_AddressOrGUID_nativeDestroyInstance
+(JNIEnv *env, jobject object)
+{
+    AddressOrGUID *instance = getHandle<AddressOrGUID>(env, object);
+
+    delete instance;
 }

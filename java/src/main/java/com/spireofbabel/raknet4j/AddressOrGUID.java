@@ -13,6 +13,9 @@ public class AddressOrGUID {
 
     private NativeHandle nativeHandle;
 
+    public AddressOrGUID() { nativeHandle = nativeAddressOrGUID(); }
+    private native NativeHandle nativeAddressOrGUID();
+
     public AddressOrGUID(NativeHandle handle) {
         nativeHandle = handle;
     }
@@ -31,4 +34,11 @@ public class AddressOrGUID {
         nativeHandle = nativeAddressOrGUID(guid);
     }
     private native NativeHandle nativeAddressOrGUID(RakNetGUID guid);
+
+    @Override
+    protected void finalize() throws Throwable {
+        nativeDestroyInstance();
+        super.finalize();
+    }
+    private native void nativeDestroyInstance();
 }
