@@ -152,6 +152,54 @@ public class RakPeerInterfaceTest {
         assertThat(result, is(notNullValue()));
         assertThat(new String(result.getData(), "UTF-8"), is(equalTo("test")));
 
+        instance.DeallocatePacket(result);
+
         RakPeerInterface.DestroyInstance(instance);
+    }
+
+    @Test
+    public void TestSendListAndReceive() throws Throwable {
+        RakPeerInterface serverPeer = RakPeerInterface.GetInstance();
+        RakPeerInterface clientPeer = RakPeerInterface.GetInstance();
+
+        SocketDescriptor [] descriptors = new SocketDescriptor[1];
+        descriptors[0] = new SocketDescriptor((short)58196, "");
+
+        assertThat(serverPeer.Startup(50, descriptors, 1), is(StartupResult.RAKNET_STARTED));
+        serverPeer.SetMaximumIncomingConnections(50);
+
+        SocketDescriptor [] clientDescriptors = new SocketDescriptor[1];
+        clientDescriptors[0] = new SocketDescriptor(0, "");
+
+        assertThat(clientPeer.Startup(1, clientDescriptors, 1), is(StartupResult.RAKNET_STARTED));
+        assertThat(clientPeer.Connect("127.0.0.1", 58196, new byte[0], null, 0, 1, 500, 500), is(ConnectionAttemptResult.CONNECTION_ATTEMPT_STARTED));
+
+        Thread.currentThread().sleep(100);
+
+        // Check a connect response is received (and swallow the packet)
+        Packet connectPacket = serverPeer.Receive();
+        assertThat(DefaultMessageIDTypes.values()[connectPacket.getData()[0]], is(DefaultMessageIDTypes.ID_NEW_INCOMING_CONNECTION));
+        serverPeer.DeallocatePacket(connectPacket);
+
+        byte [][] data = new byte[][] { "Combined".getBytes(), " result".getBytes(), " is combined".getBytes() };
+
+        clientPeer.SendList(data,
+                PacketPriority.HIGH_PRIORITY,
+                PacketReliability.RELIABLE_ORDERED,
+                0,
+                new AddressOrGUID(),
+                true);
+
+        Thread.currentThread().sleep(100);
+
+        Packet result = serverPeer.Receive();
+
+        assertThat(result, is(notNullValue()));
+        assertThat(new String(result.getData(), "UTF-8"), is(equalTo("Combined result is combined")));
+
+        serverPeer.DeallocatePacket(result);
+
+        RakPeerInterface.DestroyInstance(serverPeer);
+        RakPeerInterface.DestroyInstance(clientPeer);
     }
 }

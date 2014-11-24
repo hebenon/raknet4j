@@ -244,7 +244,20 @@ JNIEXPORT void JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_SendLoopb
  * Signature: (Lcom/spireofbabel/raknet4j/BitStream;Lcom/spireofbabel/raknet4j/RakNetEnums/PacketPriority;Lcom/spireofbabel/raknet4j/RakNetEnums/PacketReliability;ILcom/spireofbabel/raknet4j/AddressOrGUID;ZJ)J
  */
 JNIEXPORT jlong JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_Send__Lcom_spireofbabel_raknet4j_BitStream_2Lcom_spireofbabel_raknet4j_RakNetEnums_PacketPriority_2Lcom_spireofbabel_raknet4j_RakNetEnums_PacketReliability_2ILcom_spireofbabel_raknet4j_AddressOrGUID_2ZJ
-  (JNIEnv *, jobject, jobject, jobject, jobject, jint, jobject, jboolean, jlong);
+(JNIEnv *env, jobject object, jobject bitStream, jobject priority, jobject reliability, jint orderingChannel, jobject systemIdentifier, jboolean broadcast, jlong forceReceiptNumber)
+{
+    RakPeerInterface *instance = getHandle<RakPeerInterface>(env, object);
+
+    // Marshal arguments
+    BitStream *nativeBitStream = getHandle<BitStream>(env, bitStream);
+
+    AddressOrGUID *nativeSystemIdentifier = getHandle<AddressOrGUID>(env, systemIdentifier);
+
+    // Make the call
+    uint32_t result = instance->Send(nativeBitStream, convertPacketPriority(env, priority), convertPacketReliability(env, reliability), (char)orderingChannel, *nativeSystemIdentifier, (bool)broadcast, (uint32_t)forceReceiptNumber );
+
+    return (jlong)result;
+}
 
 /*
  * Class:     com_spireofbabel_raknet4j_RakPeerInterface
@@ -252,7 +265,43 @@ JNIEXPORT jlong JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_Send__Lc
  * Signature: ([[BLcom/spireofbabel/raknet4j/RakNetEnums/PacketPriority;Lcom/spireofbabel/raknet4j/RakNetEnums/PacketReliability;ILcom/spireofbabel/raknet4j/AddressOrGUID;ZJ)J
  */
 JNIEXPORT jlong JNICALL Java_com_spireofbabel_raknet4j_RakPeerInterface_SendList
-  (JNIEnv *, jobject, jobjectArray, jobject, jobject, jint, jobject, jboolean, jlong);
+(JNIEnv *env, jobject object, jobjectArray arrayOfArrays, jobject priority, jobject reliability, jint orderingChannel, jobject systemIdentifier, jboolean broadcast, jlong forceReceiptNumber)
+{
+    RakPeerInterface *instance = getHandle<RakPeerInterface>(env, object);
+
+    // Marshal arguments
+    int numArrays = env->GetArrayLength(arrayOfArrays);
+    char** nativeData = new char*[numArrays];
+    int* lengths = new int[numArrays];
+
+    for(int i = 0; i < numArrays; i++)
+    {
+        jbyteArray row = (jbyteArray)env->GetObjectArrayElement(arrayOfArrays, i);
+
+        int dataLen = env->GetArrayLength(row);
+        nativeData[i] = new char[dataLen];
+        env->GetByteArrayRegion(row, 0, dataLen, reinterpret_cast<jbyte*>(nativeData[i]));
+
+        lengths[i] = dataLen;
+    }
+
+    AddressOrGUID *nativeSystemIdentifier = getHandle<AddressOrGUID>(env, systemIdentifier);
+
+    // Make the call
+    uint32_t result = instance->SendList(const_cast<const char **>(nativeData), lengths, numArrays, convertPacketPriority(env, priority), convertPacketReliability(env, reliability), (char)orderingChannel, *nativeSystemIdentifier, (bool)broadcast, (uint32_t)forceReceiptNumber );
+
+    // Clean up the data we allocated.
+    for(int i = 0; i < numArrays; i++)
+    {
+        delete [] nativeData[i];
+    }
+
+    delete [] nativeData;
+
+    delete [] lengths;
+
+    return (jlong)result;
+}
 
 /*
  * Class:     com_spireofbabel_raknet4j_RakPeerInterface
