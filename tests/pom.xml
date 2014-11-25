@@ -17,16 +17,29 @@
             <version>4.11</version>
             <scope>test</scope>
         </dependency>
-
-        <!-- Project Dependencies -->
-        <dependency>
-            <groupId>com.spireofbabel.raknet4j</groupId>
-            <artifactId>raknet4j-darwin-x86_64</artifactId>
-            <version>${project.version}</version>
-            <scope>test</scope>
-            <type>jar</type>
-        </dependency>
     </dependencies>
+
+    <!-- Profile dependencies -->
+    <profiles>
+        <profile>
+            <id>darwin-x86_64</id>
+            <activation>
+                <property>
+                    <name>platform</name>
+                    <value>darwin-x86_64</value>
+                </property>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>com.spireofbabel.raknet4j</groupId>
+                    <artifactId>raknet4j-darwin-x86_64</artifactId>
+                    <version>${project.version}</version>
+                    <scope>test</scope>
+                    <type>jar</type>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
 
     <build>
         <plugins>
