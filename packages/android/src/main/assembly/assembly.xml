@@ -1,0 +1,39 @@
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+
+    <id>assembly-with-dll</id>
+    <formats>
+        <format>jar</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <dependencySets>
+        <!-- package the regular dependencies -->
+        <dependencySet>
+            <outputDirectory>/</outputDirectory>
+            <useProjectArtifact>true</useProjectArtifact>
+            <unpack>true</unpack>
+            <scope>runtime</scope>
+            <!-- exclude the so -->
+            <excludes>
+                <exclude>com.spireofbabel.raknet4j:raknet4jNative-android:so:x86</exclude>
+                <exclude>com.spireofbabel.raknet4j:raknet4jNative-android:so:armeabi</exclude>
+            </excludes>
+        </dependencySet>
+        <!-- package the armeabi so -->
+        <dependencySet>
+            <outputDirectory>/META-INF/lib/android_armeabi</outputDirectory>
+            <outputFileNameMapping>libRakNetNatives.jnilib</outputFileNameMapping>
+            <includes>
+                <include>com.spireofbabel.raknet4j:raknet4jNative-android:so:armeabi</include>
+            </includes>
+        </dependencySet>
+        <!-- package the x86 so -->
+        <dependencySet>
+            <outputDirectory>/META-INF/lib/android_x86</outputDirectory>
+            <outputFileNameMapping>libRakNetNatives.jnilib</outputFileNameMapping>
+            <includes>
+                <include>com.spireofbabel.raknet4j:raknet4jNative-android:so:x86</include>
+            </includes>
+        </dependencySet>
+    </dependencySets>
+</assembly>

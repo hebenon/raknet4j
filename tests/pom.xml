@@ -39,6 +39,26 @@
                 </dependency>
             </dependencies>
         </profile>
+
+        <profile>
+            <id>android</id>
+            <activation>
+                <property>
+                    <name>platform</name>
+                    <value>android</value>
+                </property>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>com.spireofbabel.raknet4j</groupId>
+                    <artifactId>raknet4j-android</artifactId>
+                    <version>${project.version}</version>
+                    <scope>test</scope>
+                    <type>jar</type>
+                </dependency>
+            </dependencies>
+        </profile>
+
     </profiles>
 
     <build>
