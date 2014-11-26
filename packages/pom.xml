@@ -17,6 +17,19 @@
     <profiles>
 
         <profile>
+            <id>android</id>
+            <activation>
+                <property>
+                    <name>platform</name>
+                    <value>android</value>
+                </property>
+            </activation>
+            <modules>
+                <module>android</module>
+            </modules>
+        </profile>
+
+        <profile>
             <id>darwin-x86_64</id>
             <activation>
                 <property>

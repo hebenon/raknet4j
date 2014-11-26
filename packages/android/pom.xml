@@ -1,0 +1,76 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.spireofbabel.raknet4j</groupId>
+        <artifactId>packageParent</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>raknet4j-android</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>RakNet4J (android all)</name>
+    <url>https://github.com/hebenon/raknet4j</url>
+
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.spireofbabel.raknet4j</groupId>
+            <artifactId>raknet4j</artifactId>
+            <version>${project.version}</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>com.spireofbabel.raknet4j</groupId>
+            <artifactId>raknet4jNative-android</artifactId>
+            <classifier>armeabi</classifier>
+            <version>${project.version}</version>
+            <type>so</type>
+        </dependency>
+        <dependency>
+            <groupId>com.spireofbabel.raknet4j</groupId>
+            <artifactId>raknet4jNative-android</artifactId>
+            <classifier>armeabi-v7a</classifier>
+            <version>${project.version}</version>
+            <type>so</type>
+        </dependency>
+        <dependency>
+            <groupId>com.spireofbabel.raknet4j</groupId>
+            <artifactId>raknet4jNative-android</artifactId>
+            <classifier>x86</classifier>
+            <version>${project.version}</version>
+            <type>so</type>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+
+                        <configuration>
+                            <descriptor>src/main/assembly/assembly.xml</descriptor>
+                            <appendAssemblyId>false</appendAssemblyId>
+                            <archive>
+                                <manifest>
+                                    <packageName>com.spireofbabel.raknet4j</packageName>
+                                    <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                                </manifest>
+                            </archive>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
