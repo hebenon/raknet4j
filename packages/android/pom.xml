@@ -31,6 +31,13 @@
         <dependency>
             <groupId>com.spireofbabel.raknet4j</groupId>
             <artifactId>raknet4jNative-android</artifactId>
+            <classifier>armeabi-v7a</classifier>
+            <version>${project.version}</version>
+            <type>so</type>
+        </dependency>
+        <dependency>
+            <groupId>com.spireofbabel.raknet4j</groupId>
+            <artifactId>raknet4jNative-android</artifactId>
             <classifier>x86</classifier>
             <version>${project.version}</version>
             <type>so</type>

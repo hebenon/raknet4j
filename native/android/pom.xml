@@ -75,7 +75,7 @@
                 <artifactId>android-maven-plugin</artifactId>
                 <extensions>true</extensions>
                 <configuration>
-                    <ndkArchitecture>armeabi x86</ndkArchitecture>
+                    <ndkArchitecture>armeabi armeabi-v7a x86</ndkArchitecture>
                 </configuration>
             </plugin>
         </plugins>

@@ -17,6 +17,7 @@
             <excludes>
                 <exclude>com.spireofbabel.raknet4j:raknet4jNative-android:so:x86</exclude>
                 <exclude>com.spireofbabel.raknet4j:raknet4jNative-android:so:armeabi</exclude>
+                <exclude>com.spireofbabel.raknet4j:raknet4jNative-android:so:armeabi-v7a</exclude>
             </excludes>
         </dependencySet>
         <!-- package the armeabi so -->
@@ -25,6 +26,14 @@
             <outputFileNameMapping>libRakNetNatives.jnilib</outputFileNameMapping>
             <includes>
                 <include>com.spireofbabel.raknet4j:raknet4jNative-android:so:armeabi</include>
+            </includes>
+        </dependencySet>
+        <!-- package the armeabi-v7a so -->
+        <dependencySet>
+            <outputDirectory>/META-INF/lib/android_armeabi_v7a</outputDirectory>
+            <outputFileNameMapping>libRakNetNatives.jnilib</outputFileNameMapping>
+            <includes>
+                <include>com.spireofbabel.raknet4j:raknet4jNative-android:so:armeabi-v7a</include>
             </includes>
         </dependencySet>
         <!-- package the x86 so -->
