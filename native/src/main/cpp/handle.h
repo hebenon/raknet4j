@@ -34,7 +34,7 @@ inline jobject createHandleObject(JNIEnv *env, const T *t)
 {
     jlong handle = reinterpret_cast<jlong>(t);
     
-    jclass clazz = env->FindClass("Lcom/spireofbabel/raknet4j/NativeHandle;");
+    jclass clazz = env->FindClass("com/spireofbabel/raknet4j/NativeHandle");
     jmethodID constructor = env->GetMethodID(clazz, "<init>","(J)V");
     
     jobject handleObject = env->NewObject(clazz, constructor, handle);
