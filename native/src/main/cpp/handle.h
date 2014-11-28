@@ -5,7 +5,7 @@ inline jfieldID getHandleObjectField(JNIEnv *env, jobject obj)
 {
     jclass c = env->GetObjectClass(obj);
     // J is the type signature for long:
-    return env->GetFieldID(c, "nativeHandle", "[Lcom/spireofbabel/raknet4j/NativeHandle;");
+    return env->GetFieldID(c, "nativeHandle", "Lcom/spireofbabel/raknet4j/NativeHandle;");
 }
 
 inline jfieldID getHandleField(JNIEnv *env, jobject obj)
@@ -34,7 +34,7 @@ inline jobject createHandleObject(JNIEnv *env, const T *t)
 {
     jlong handle = reinterpret_cast<jlong>(t);
     
-    jclass clazz = env->FindClass("[Lcom/spireofbabel/raknet4j/NativeHandle;");
+    jclass clazz = env->FindClass("Lcom/spireofbabel/raknet4j/NativeHandle;");
     jmethodID constructor = env->GetMethodID(clazz, "<init>","(J)V");
     
     jobject handleObject = env->NewObject(clazz, constructor, handle);
