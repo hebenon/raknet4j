@@ -7,7 +7,7 @@ import org.scijava.nativelib.NativeLibraryUtil;
  */
 public class RakNetGUID {
     static {
-        NativeLibraryUtil.loadNativeLibrary(BitStream.class, "RakNetNatives");
+        LibraryUtility.loadNativeLibrary("RakNetNatives");
     }
 
     private NativeHandle nativeHandle;

@@ -7,49 +7,12 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>raknet4jTests</artifactId>
-    <name>Java unit tests for RakNet4J</name>
+    <artifactId>testsParent</artifactId>
+    <name>Java unit tests for RakNet4J Parent</name>
 
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.11</version>
-        </dependency>
-    </dependencies>
+    <packaging>pom</packaging>
 
-    <!-- Profile dependencies -->
     <profiles>
-        <profile>
-            <id>darwin-x86_64</id>
-            <activation>
-                <property>
-                    <name>platform</name>
-                    <value>darwin-x86_64</value>
-                </property>
-            </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>com.spireofbabel.raknet4j</groupId>
-                    <artifactId>raknet4j-darwin-x86_64</artifactId>
-                    <version>${project.version}</version>
-                    <type>jar</type>
-                </dependency>
-            </dependencies>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <configuration>
-                            <testSourceDirectory>${basedir}/src/main/java/</testSourceDirectory>
-                            <testClassesDirectory>${project.build.directory}/classes/</testClassesDirectory>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
         <profile>
             <id>android</id>
             <activation>
@@ -58,44 +21,48 @@
                     <value>android</value>
                 </property>
             </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>com.spireofbabel.raknet4j</groupId>
-                    <artifactId>raknet4j-android</artifactId>
-                    <version>${project.version}</version>
-                    <type>jar</type>
-                    <scope>provided</scope>
-                </dependency>
-            </dependencies>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>com.jayway.maven.plugins.android.generation2</groupId>
-                        <artifactId>android-maven-plugin</artifactId>
-                        <configuration>
-                            <sdk>
-                                <path>${env.ANDROID_HOME}</path>
-                                <platform>2.1</platform>
-                            </sdk>
-                        </configuration>
-                        <extensions>true</extensions>
-                    </plugin>
-                </plugins>
-            </build>
+            <modules>
+                <module>android</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>darwin-x86_64</id>
+            <activation>
+                <property>
+                    <name>platform</name>
+                    <value>darwin-x86_64</value>
+                </property>
+            </activation>
+            <modules>
+                <module>host</module>
+            </modules>
         </profile>
 
+        <!-- <profile>
+          <id>win32</id>
+          <activation>
+            <property>
+              <name>platform</name>
+              <value>win32</value>
+            </property>
+          </activation>
+          <modules>
+            <module>win32</module>
+          </modules>
+        </profile>
+
+        <profile>
+          <id>hpux</id>
+          <activation>
+            <property>
+              <name>platform</name>
+              <value>hpux</value>
+            </property>
+          </activation>
+          <modules>
+            <module>hpux</module>
+          </modules>
+        </profile> -->
+
     </profiles>
-
-    <build>
-        <plugins>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                </configuration>
-            </plugin>
-        </plugins>
-
-    </build>
 </project>

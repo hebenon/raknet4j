@@ -1,0 +1,62 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.spireofbabel.raknet4j</groupId>
+        <artifactId>parentProject</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>raknet4jTests-host</artifactId>
+    <name>Java unit tests for RakNet4J</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+        </dependency>
+    </dependencies>
+
+    <!-- Profile dependencies -->
+    <profiles>
+        <profile>
+            <id>darwin-x86_64</id>
+            <activation>
+                <property>
+                    <name>platform</name>
+                    <value>darwin-x86_64</value>
+                </property>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>com.spireofbabel.raknet4j</groupId>
+                    <artifactId>raknet4j-darwin-x86_64</artifactId>
+                    <version>${project.version}</version>
+                    <type>jar</type>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
+
+    <build>
+        <testSourceDirectory>../src/main/java</testSourceDirectory>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <testSourceDirectory>../src/main/java/</testSourceDirectory>
+                    <testClassesDirectory>${project.build.directory}/test-classes/</testClassesDirectory>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

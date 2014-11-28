@@ -8,7 +8,7 @@ import org.scijava.nativelib.NativeLibraryUtil;
  */
 public class AddressOrGUID {
     static {
-        NativeLibraryUtil.loadNativeLibrary(AddressOrGUID.class, "RakNetNatives");
+        LibraryUtility.loadNativeLibrary("RakNetNatives");
     }
 
     private NativeHandle nativeHandle;

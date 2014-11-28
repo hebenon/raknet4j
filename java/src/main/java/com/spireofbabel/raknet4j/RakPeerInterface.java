@@ -13,7 +13,7 @@ import org.scijava.nativelib.NativeLibraryUtil;
 
 public class RakPeerInterface {
     static {
-		NativeLibraryUtil.loadNativeLibrary(RakPeerInterface.class, "RakNetNatives");
+		LibraryUtility.loadNativeLibrary("RakNetNatives");
     }
 
     private NativeHandle nativeHandle;

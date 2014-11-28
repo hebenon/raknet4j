@@ -1,5 +1,6 @@
 package com.spireofbabel.raknet4j.ReplicaManager3;
 
+import com.spireofbabel.raknet4j.LibraryUtility;
 import com.spireofbabel.raknet4j.NativeHandle;
 import org.scijava.nativelib.NativeLibraryUtil;
 
@@ -8,7 +9,7 @@ import org.scijava.nativelib.NativeLibraryUtil;
  */
 public class DeserializeParameters {
     static {
-        NativeLibraryUtil.loadNativeLibrary(DeserializeParameters.class, "RakNetNatives");
+        LibraryUtility.loadNativeLibrary("RakNetNatives");
     }
 
     private NativeHandle nativeHandle;

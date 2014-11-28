@@ -8,7 +8,7 @@ import org.scijava.nativelib.NativeLibraryUtil;
 
 public class SocketDescriptor {
     static {
-        NativeLibraryUtil.loadNativeLibrary(SocketDescriptor.class, "RakNetNatives");
+        LibraryUtility.loadNativeLibrary("RakNetNatives");
     }
 
     private NativeHandle nativeHandle;

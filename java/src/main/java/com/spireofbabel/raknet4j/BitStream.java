@@ -7,7 +7,7 @@ import org.scijava.nativelib.NativeLibraryUtil;
  */
 public class BitStream {
     static {
-        NativeLibraryUtil.loadNativeLibrary(BitStream.class,"RakNetNatives");
+        LibraryUtility.loadNativeLibrary("RakNetNatives");
     }
 
     private NativeHandle nativeHandle;

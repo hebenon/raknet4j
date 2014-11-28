@@ -1,5 +1,7 @@
 package com.spireofbabel.raknet4j.ReplicaManager3;
 
+import junit.framework.TestCase;
+
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
@@ -13,7 +15,7 @@ import org.junit.Test;
 /**
  * Created by bcarson on 16/11/14.
  */
-public class ReplicaManager3Test {
+public class ReplicaManager3Test extends TestCase {
     @Test
     public void testAttachToRakPeerInterface() {
         RakPeerInterface instance = RakPeerInterface.GetInstance();

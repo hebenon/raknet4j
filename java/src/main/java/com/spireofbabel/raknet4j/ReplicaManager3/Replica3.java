@@ -1,9 +1,6 @@
 package com.spireofbabel.raknet4j.ReplicaManager3;
 
-import com.spireofbabel.raknet4j.BitStream;
-import com.spireofbabel.raknet4j.NativeHandle;
-import com.spireofbabel.raknet4j.RakNetGUID;
-import com.spireofbabel.raknet4j.RakPeerInterface;
+import com.spireofbabel.raknet4j.*;
 import org.scijava.nativelib.NativeLibraryUtil;
 
 /**
@@ -11,7 +8,7 @@ import org.scijava.nativelib.NativeLibraryUtil;
  */
 abstract class Replica3 {
 	static {
-		NativeLibraryUtil.loadNativeLibrary(Replica3.class, "RakNetNatives");
+		LibraryUtility.loadNativeLibrary("RakNetNatives");
 	}
 
 	NativeHandle nativeHandle;

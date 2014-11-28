@@ -1,5 +1,7 @@
 package com.spireofbabel.raknet4j;
 
+import junit.framework.TestCase;
+
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
@@ -13,9 +15,9 @@ import org.junit.Test;
 /**
  * Created by bcarson on 6/11/14.
  */
-public class RakPeerInterfaceTest {
+public class RakPeerInterfaceTest extends TestCase {
     @Test
-    public void TestGetInstance() {
+    public void testGetInstance() {
         RakPeerInterface instance = RakPeerInterface.GetInstance();
 
         assertThat(instance, is(notNullValue()));
@@ -24,7 +26,7 @@ public class RakPeerInterfaceTest {
     }
 
     @Test
-    public void TestStartupAndShutdown() {
+    public void testStartupAndShutdown() {
         RakPeerInterface instance = RakPeerInterface.GetInstance();
 
         SocketDescriptor [] descriptors = new SocketDescriptor[1];
@@ -42,7 +44,7 @@ public class RakPeerInterfaceTest {
     }
 
     @Test
-    public void TestGetSetMaximumConnections() {
+    public void testGetSetMaximumConnections() {
         RakPeerInterface instance = RakPeerInterface.GetInstance();
 
         SocketDescriptor [] descriptors = new SocketDescriptor[1];
@@ -58,7 +60,7 @@ public class RakPeerInterfaceTest {
     }
 
     @Test
-    public void TestConnect() throws Throwable {
+    public void testConnect() throws Throwable {
         RakPeerInterface serverPeer = RakPeerInterface.GetInstance();
         RakPeerInterface clientPeer = RakPeerInterface.GetInstance();
 
@@ -84,7 +86,7 @@ public class RakPeerInterfaceTest {
     }
 
     @Test
-    public void TestReceiveShouldReturnNullIfNoPacketPending() {
+    public void testReceiveShouldReturnNullIfNoPacketPending() {
         RakPeerInterface instance = RakPeerInterface.GetInstance();
 
         assertThat(instance.Receive(), is(nullValue()));
@@ -93,7 +95,7 @@ public class RakPeerInterfaceTest {
     }
 
     @Test
-    public void TestSendAndReceive() throws Throwable {
+    public void testSendAndReceive() throws Throwable {
         RakPeerInterface serverPeer = RakPeerInterface.GetInstance();
         RakPeerInterface clientPeer = RakPeerInterface.GetInstance();
 
@@ -137,7 +139,7 @@ public class RakPeerInterfaceTest {
     }
 
     @Test
-    public void TestSendLocalAndReceive() throws Throwable
+    public void testSendLocalAndReceive() throws Throwable
     {
         RakPeerInterface instance = RakPeerInterface.GetInstance();
 
@@ -158,7 +160,7 @@ public class RakPeerInterfaceTest {
     }
 
     @Test
-    public void TestSendListAndReceive() throws Throwable {
+    public void testSendListAndReceive() throws Throwable {
         RakPeerInterface serverPeer = RakPeerInterface.GetInstance();
         RakPeerInterface clientPeer = RakPeerInterface.GetInstance();
 

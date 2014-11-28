@@ -8,7 +8,7 @@ import org.scijava.nativelib.NativeLibraryUtil;
  */
 public class Packet {
     static {
-        NativeLibraryUtil.loadNativeLibrary(Packet.class, "RakNetNatives");
+        LibraryUtility.loadNativeLibrary("RakNetNatives");
     }
 
     private NativeHandle nativeHandle;

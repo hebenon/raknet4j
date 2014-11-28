@@ -1,5 +1,6 @@
 package com.spireofbabel.raknet4j.ReplicaManager3;
 
+import com.spireofbabel.raknet4j.LibraryUtility;
 import com.spireofbabel.raknet4j.NativeHandle;
 import com.spireofbabel.raknet4j.PluginInterface2;
 import com.spireofbabel.raknet4j.RakNetGUID;
@@ -11,7 +12,7 @@ import org.scijava.nativelib.NativeLibraryUtil;
  */
 public abstract class ReplicaManager3 extends PluginInterface2 {
     static {
-        NativeLibraryUtil.loadNativeLibrary(ReplicaManager3.class, "RakNetNatives");
+        LibraryUtility.loadNativeLibrary("RakNetNatives");
     }
 
     private NativeHandle nativeHandle;
