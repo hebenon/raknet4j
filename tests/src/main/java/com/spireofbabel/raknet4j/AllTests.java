@@ -1,19 +1,15 @@
 package com.spireofbabel.raknet4j;
 
 import com.spireofbabel.raknet4j.ReplicaManager3.ReplicaManager3Test;
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 
-public class AllTests extends TestSuite {
-
-    public static Test suite() {
-        TestSuite suite = new TestSuite();
-
-        suite.addTestSuite(ConsoleServerTest.class);
-        suite.addTestSuite(RakPeerInterfaceTest.class);
-        suite.addTestSuite(SocketDescriptorTest.class);
-        suite.addTestSuite(ReplicaManager3Test.class);
-
-        return suite;
-    }
+@RunWith(Suite.class)
+@Suite.SuiteClasses({
+        ConsoleServerTest.class,
+        RakPeerInterfaceTest.class,
+        SocketDescriptorTest.class,
+        ReplicaManager3Test.class
+})
+public class AllTests {
 }
