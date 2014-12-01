@@ -24,7 +24,7 @@ TODO: Maven repository.
 </dependency>
 ```
 
-Android:
+### Android:
 Because of how Android handles native libs, adding it to your project is a little different. Add the build product jar file (in /packages/android/target) to your projects /libs directory as normal. Then add the native library files for each of your target architectures in a subdirectory of your /libs folder, named after the target architecture (e.g. "armeabi" or "x86"). You can find the RakNet4J native libs in the /native/android/target/libs folder.
 
 Using it
